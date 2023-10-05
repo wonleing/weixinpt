@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+{% load i18n %}
+<head>
+    <title>客户详单</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+</head>
+<body>
+    <div align="center">
+      <img class="logo" src="http://ww4.sinaimg.cn/mw690/558fe6e3gw1eyvli5ueqaj20en027dh0.jpg" width="810px" />
+      {% if login_user %}
+        <div style="float:right;"><b>当前店号: {{ login_user }}</b> | <a href="/zhongmi/logout/"><b>登出</b></a></div>
+        <form action="{% url 'zhongmi_updatecustomer' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <fieldset class="add_fieldset">
+       	  <legend><h4>会员详情</h4></legend>
+          <table class="update_table">
+          <tr>
+            <td>客户号：&emsp;&emsp;</td>
+              <td>{{ c.customerid }}</td>
+            <td>微&nbsp;信&nbsp;ID&nbsp;：&emsp;&emsp;</td>
+            <td>{{ c.wxid }}</td>
+           </tr>
+          <tr>
+            <td>电&emsp;话：&emsp;&emsp;</td>
+            <td>{{ c.phone }}</td>
+            <td>所属渠道：&emsp;&emsp;</td>
+            <td>{{ c.channelid }}</td>
+          </tr>
+          <tr>
+            <td>等&emsp;级：&emsp;&emsp;</td>
+            <td>{{ c.grade }}</td>
+            <td>推&nbsp;荐&nbsp;人&nbsp;：&emsp;&emsp;</td>
+            <td>{{ c.saler }}</td>
+          </tr>
+          <tr>
+            <td>总消费：&emsp;&emsp;</td>
+            <td>{{ c.amount }}</td>
+            <td><a href="{% url 'zhongmi_checkdetail' %}?customerid={{ c.customerid }}">消费记录</a>&emsp;&emsp;&emsp;</td>
+          </tr>
+          <tr>
+            <td style="vertical-align:top">已推荐客户：</td>
+            <td colspan="3" class="wrap">
+              {% for s in salelist %}
+              <a class="phone_a" href="../{{ s.phone }}">{{ s.phone }}</a>&emsp;
+              {% endfor %}
+            </td>
+          </tr>
+          </table>
+          <hr/>
+          <table class="update_table_2">
+            <input type="hidden" name="phone" value="{{ c.phone }}"/>
+          <tr>
+            <td><label>姓名：</label></td>
+            <td><input type="text" name="name" value="{{ c.name }}"/></td>
+            <td><label>性别：</label></td>
+            <td><input type="text" name="gender" value="{{ c.gender }}"/></td>
+          </tr>
+          <tr>
+            <td><label>年龄：</label></td>
+            <td><input type="text" name="age" value="{{ c.age }}"/></td>
+            <td><label>地址：</label></td>
+            <td><input type="text" name="address" value="{{ c.address }}"/></td>
+          </tr>
+          <tr>
+            <td><label>积分：</label></td>
+            <td colspan="3"><input type="text" name="point" value="{{ c.point }}"/></td>
+          </tr>
+          </table>
+          <p class="bton"><input type="submit" value="修改会员信息" /></p>
+        </fieldset>
+        </form>       
+        <form action="{% url 'zhongmi_buyitem' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <fieldset class="add_fieldset">
+          <legend><h4>购买下单</h4></legend>
+          <table class="order_table">
+            <input type="hidden" name="customerid" value="{{ c.customerid }}"/>
+            {% for j in "xxxxx" %}
+            <tr>
+              <td>
+              <select class="order_select" name="item[{{ forloop.counter0 }}]">
+                <option value ="" selected="selected"></option>
+                {% for i in item %}
+                <option value ="{{ i.itemid }}-{{ i.price }}">{{ i.name }}-￥{{ i.price }}</option>
+                {% endfor %}
+              </select>&emsp;
+              </td>
+              <td>数量：</td>
+              <td><input type="text" name="amount[{{ forloop.counter0 }}]"></td>
+            </tr>
+            {% endfor %}
+          </table>
+          <p>实收金额：<input type="text" name="total"><input type="submit" value="确定下单" /></p>
+        </fieldset>
+        </form>
+	    <a href="../../customerlist/">返回会员列表</a>
+      {% else %}
+      <h4>用户登录</h4>
+      <form action="{% url 'zhongmi_dologin' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <label>分店号:&emsp;</label><input type="text" name="account" /><br>
+        <label>密码:&emsp;&emsp;</label><input type="password" name="password" /><br>
+        <p><input type="submit" value="登录" /></p>
+      </form>
+      {% endif %}
+    </div>
+    <br/><hr/>
+    <div align="center"><font size="2">本平台由<a href="http://www.jyousoft.com">捷优软件</a>提供. Copyright 2013-2017. All rights reserved.</font></div>
+</body>
+</html>

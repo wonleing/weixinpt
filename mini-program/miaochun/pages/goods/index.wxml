@@ -1,0 +1,268 @@
+<view wx:if="{{authed == 1 }}">
+<view class="wrap flexbox-d-c">
+  <scroll-view class="scroll-y flex-1" scroll-y>
+    <swiper indicator-dots="true">
+      <swiper-item wx:for="{{slidelist}}" wx:key="item">
+        <image src="{{item}}" mode="widthFix"></image>
+      </swiper-item>
+    </swiper>
+    <view class="top">
+      <view class="flexbox-j-b flexbox-a-c">
+        <view class="top-title">
+          <view>{{productinfo.title}}</view>
+          <view>{{productinfo.description}}</view>
+        </view>
+        <view class="top-assess" bindtap="tapNavEvaluate">
+          <view>99.8%</view>
+          <view>好评率></view>
+        </view>
+      </view>
+      <view class="flexbox-j-b flexbox-a-c">
+        <view class="top-price">
+          <text>￥{{productinfo.price}}</text>
+          <text>￥{{productinfo.origprice}}</text>
+        </view>
+        <view class="top-points">库存{{productinfo.number}}件  账户余额{{balance}}元</view>
+      </view>
+    </view>
+    <view class="br"></view>
+    <view class="middle">
+      <view wx:if="{{productinfo.tag != '自提专用'}}" class="middle-li" bindtap="chooseaddr">
+        <view>
+          <text class="middle-title">配送：</text>
+          <text class="color-7f7">{{province}}{{city}}{{county}}{{address}}</text>
+        </view>
+        <view class="iconfont icon-you"></view>
+      </view>
+      <view class="middle-li" bindtap="showChoosedDialog">
+        <view>
+          <text class="middle-title">已选择：</text>
+          <text>{{count}}件</text>
+        </view>
+        <view class="iconfont icon-you"></view>
+      </view>
+      <!--<view class="middle-li" bindtap="showCouponDialog">
+        <view class="flexbox-a-c">
+          <text class="middle-title">领劵：</text>
+          <view class="middle-coupon">
+            <text>每满169减20券</text>
+            <text class="middle-coupon-border"></text>
+          </view>
+          <view class="middle-coupon">
+            <text>每满169减20券</text>
+            <text class="middle-coupon-border"></text>
+          </view>
+        </view>
+        <view class="iconfont icon-you"></view>
+      </view>-->
+      <!--<view class="middle-li" bindtap="showServerDialog">
+        <view class="flexbox">
+          <text class="flex-none middle-title">服务：</text>
+          <view class="middle-server">
+            <text>48小时快速退款</text>
+            <text>满88元包邮</text>
+            <text>网易自营品牌</text>
+            <text>部分地区无法配送</text>
+          </view>
+        </view>
+        <view class="iconfont icon-you"></view>
+      </view>-->
+    </view>
+    <view class="br"></view>
+    <view class="assess">
+      <view class="assess-title flexbox-j-b flexbox-a-c">
+        <view>用户评价(77581)</view>
+        <view bindtap="tapNavEvaluate">
+          <text>99.8%好评</text>
+          <text class="iconfont icon-you"></text>
+        </view>
+      </view>
+      <view class="assess-list">
+        <view class="assess-item">
+          <view class="assess-item-top flexbox-a-c">
+            <image src="{{comments[0].fields.pic}}" mode="aspectFill"
+              class="assess-item-img"></image>
+            <view class="assess-item-name">{{comments[0].fields.name}}</view>
+            <view class="assess-item-stars flexbox-a-c">
+              <image wx:for="{{[0,0,0,0,0]}}" wx:key="{{index}}" src="../../images/star_whole.png" mode="aspectFit"></image>
+            </view>
+          </view>
+          <view class="assess-item-time">
+            <text>{{datestr}}</text>
+            <!--<text>12盒*2提</text>-->
+          </view>
+          <view class="assess-item-content">
+            {{comments[0].fields.detail}}
+          </view>
+          <view wx:if='{{comments[0].fields.link != ""}}' class="assess-item-imgs flexbox-a-c">
+            <image src="{{comments[0].fields.link}}" mode="aspectFill" data-url="{{comments[0].fields.link}}" bindtap="tapPreviewImage"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="br"></view>
+    <view wx:for="{{detaillist}}" wx:key="item" class="detail">
+      <image src="{{item}}" mode="widthFix"></image>
+    </view>
+    <!-- <view class="br"></view> -->
+  </scroll-view>
+</view>
+
+<view class="handle flexbox-a-c">
+  <view class="handle-icon flexbox-a-c">
+    <view bindtap="tapNavHome">
+      <image src="../../images/handle_1.png" mode="widthFix"></image>
+    </view>
+    <view>
+      <image src="../../images/handle_2.png" mode="widthFix"></image>
+      <button open-type="contact" session-from='weapp' style="opacity: 0;position: absolute;width:28px;height:28px;"></button>
+
+    </view>
+    <view class="shop-car" bindtap="tapShopCart">
+      <image src="../../images/handle_3.png" mode="widthFix"></image>
+      <!--<text class="shop-car-num">2</text>-->
+    </view>
+  </view>
+  <view class="handle-btns flexbox-a-c">
+    <view bindtap="payroll">优惠充值</view>
+    <view class="handle-btns-curr" bindtap="dopay">下单购买</view>
+  </view>
+</view>
+
+<!-- 配送地址选择 未保存地址-->
+<view class="dialog" hidden="{{hiddenAddCity}}">
+  <view class="dialog-mask" bindtap="hideAllDialog"></view>
+  <view class="dialog-content city handle-blank">
+    <view class="city-title flexbox-j-b">
+      <view>配送至</view>
+      <view>确定</view>
+    </view>
+    <view class="city-nav flexbox">
+      <view class="city-curr">北京市</view>
+      <view>东城区</view>
+      <view>东华门街道</view>
+    </view>
+    <view class="city-list">
+      <view>北京市</view>
+      <view>北京市</view>
+      <view>北京市</view>
+      <view>北京市</view>
+    </view>
+  </view>
+</view>
+<!-- 配送地址选择 已保存地址-->
+<view class="dialog" hidden="{{hiddenCity}}">
+  <view class="dialog-mask" bindtap="hideAllDialog"></view>
+  <view class="dialog-content flexbox-d-c address handle-blank">
+    <view class="address-title">收货方式</view>
+    <view class="address-list flex-1">
+      <view class="address-item">
+        <label class="flexbox-a-c">
+          <radio bindtap="ziti" color="#b4282d" />
+          <text>线下自提</text>
+        </label>
+      </view>
+    </view>
+    <view class="address-btn" bindtap="chooseaddr">选择配送地址</view>
+  </view>
+</view>
+
+<!-- 选择规格 -->
+<view class="dialog" hidden="{{hiddenChoosed}}">
+  <view class="dialog-mask" bindtap="hideAllDialog"></view>
+  <view class="dialog-content choosed handle-blank">
+    <view class="choosed-top">
+      <image src="{{slidelist[0]}}" mode="aspectFill"></image>
+      <view class="choosed-price">
+        <view>
+          <text>单价：</text>
+          <text>￥{{productinfo.price}}</text>
+          <text class="choosed-cost">￥{{productinfo.origprice}}</text>
+        </view>
+        <view>
+          <text>总价：</text>
+          <text>{{total}}</text>
+        </view>
+        <view class="tip">不满{{man}}元收邮费{{postfee}}元</view>
+      </view>
+    </view>
+    <view>
+      <view class="choosed-title">规格</view>
+      <view class="choosed-single">{{productinfo.style}}</view>
+    </view>
+    <view>
+      <view class="choosed-title">数量</view>
+      <view class="choosed-add">
+        <text bindtap='reducecount'>-</text>
+        <input type="text" value="{{count}}" />
+        <text bindtap='addcount'>+</text>
+        <view class="choosed-single" bindtap='choosenum'>确定</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 服务 -->
+<view class="dialog" hidden="{{hiddenServer}}">
+  <view class="dialog-mask" bindtap="hideAllDialog"></view>
+  <view class="dialog-content server handle-blank">
+    <view class="server-title">服务</view>
+    <view class="server-list">
+      <view class="server-item">
+        <view class="server-item-title">48小时快速退款</view>
+        <view class="server-item-cnt">收到退货包裹并确认无误后，将在48小时内办理退款，退款将原路返回，不同银行处理时间不同，预计1-5个工作日到账。</view>
+      </view>
+      <view class="server-item">
+        <view class="server-item-title">满88元免邮费</view>
+        <view class="server-item-cnt">单笔订单金额（不含运费），大陆地区满88元免邮，不满88元收取10元邮费；港澳台地区满500元免邮，不满500元收取30元运费；海外地区以下单页提示运费为准。</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 优惠券 -->
+<view class="dialog" hidden="{{hiddenCoupon}}">
+  <view class="dialog-mask" bindtap="hideAllDialog"></view>
+  <view class="dialog-content coupon handle-blank">
+    <view class="coupon-title">领劵</view>
+    <view class="coupon-lit">
+      <view class="coupon-item">
+        <view class="coupon-top flexbox-j-b flexbox-a-c">
+          <view class="coupon-num">
+            <text>10</text>
+            <text>元</text>
+          </view>
+          <view class="coupon-tip">
+            <view>每满99减10券</view>
+            <view>2019.03.22-2019.03.28</view>
+          </view>
+          <view class="coupon-btn">立即领取</view>
+        </view>
+        <view class="coupon-line"></view>
+        <view class="coupon-bottom">全场可用；限时购、特价等特惠商品，处于新品期的商品及详情页标注不可用券的商品除外</view>
+      </view>
+      <view class="coupon-item">
+        <view class="coupon-top flexbox-j-b flexbox-a-c">
+          <view class="coupon-num">
+            <text>10</text>
+            <text>元</text>
+          </view>
+          <view class="coupon-tip">
+            <view>每满99减10券</view>
+            <view>2019.03.22-2019.03.28</view>
+          </view>
+          <view class="coupon-btn">立即领取</view>
+        </view>
+        <view class="coupon-line"></view>
+        <view class="coupon-bottom">全场可用；限时购、特价等特惠商品，处于新品期的商品及详情页标注不可用券的商品除外</view>
+      </view>
+    </view>
+  </view>
+</view>
+</view>
+<view wx:else>
+  <view>
+    <image src='{{backimg}}' class='backimg' mode='widthFix'></image>
+    <button class='loginbtn' open-type='getUserInfo' bindgetuserinfo='doauth'>授权登录</button>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+<!--experiene.wxml-->
+<view class='containers'>
+  <view class='postcard'>
+    <image wx:if='{{pic}}' src='{{pic}}' mode='widthFix' bindtap='screenImg' data-imgUrl="{{pic}}"></image>
+  </view>
+  <view class='backHome iconfont icon-xianxingdiqiu' bindtap='backtohome'></view>
+    <view class='share'>
+    <button open-type='share' class='share1'>分享</button> 
+    <!--<button bindtap='backtohome' class='share2'>返回首页</button>-->
+    <button bindtap='savetolocal' class='share2'>保存至相册</button>
+  </view>
+</view>

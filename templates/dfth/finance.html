@@ -1,0 +1,153 @@
+{% extends "dfth/base.html" %}
+{% block pagebody %}
+{% if 'C' in login_user.auth %}
+  <form action="{% url 'dfth_finance' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <input type="text" name="word" /><input type="submit" value="模糊查找" />
+  </form>
+  <h4>设备列表&emsp;<a href="javascript:print1()" rel="external nofollow" target="_self">打印</a><h4>
+  <div id="div1"><table>
+    <tr><th>设备编号</th><th>设备名称</th><th>购买日期</th><th>价格</th></tr>
+    {% for d in device %}
+    <tr><td>{{ d.deviceid }}</td>
+      <td>{{ d.devicename }}</td>
+      <td>{{ d.buydate }}</td>
+      <td>{{ d.price }}</td>
+    {% endfor %}
+  </table></div>
+  <form action="{% url 'dfth_adddevice' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增设备</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>设备编号:</label></td>
+          <td><input type="text" name="deviceid" /></td>
+        </tr>
+        <tr>
+          <td><label>设备名称:</label></td>
+          <td><input type="text" name="devicename" /></td>
+        </tr>
+        <tr>
+          <td><label>购买日期:</label></td>
+          <td><input type="text" name="buydate" /></td>
+        </tr>
+        <tr>
+          <td><label>价格:</label></td>
+          <td><input type="text" name="price" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset>
+  </form></br>
+  <h4>收入记录&emsp;<a href="javascript:print2()" rel="external nofollow" target="_self">打印</a></h4>
+  <div id="div2"><table>
+    <tr><th>收入流水号</th><th>客户名称</th><th>合同编号</th><th>合同搞要</th><th>合同总额</th><th>实收金额</th><th>收入日期</th></tr>
+    {% for i in income %}
+    <tr><td>{{ i.id }}</td>
+      <td>{{ i.customername }}</td>
+      <td>{{ i.contractid }}</td>
+      <td>{{ i.contractid.summary }}</td>
+      <td>{{ i.contractid.total }}</td>
+      <td>{{ i.number }}</td>
+      <td>{{ i.date|date:"Ymd" }}</td>
+    {% endfor %}
+  </table></div>
+  <h4>合同列表</h4>
+  <table>
+    <tr><th>合同编号</th><th>客户名称</th><th>合同摘要</th><th>总金额</th><th>日期</th></tr>
+    {% for c in contract %}
+    <tr><td>{{ c.contractid }}</td>
+      <td>{{ c.customername }}</td>
+      <td>{{ c.summary }}</td>
+      <td>{{ c.total }}</td>
+      <td>{{ c.date|date:"Ymd" }}</td>
+    {% endfor %}
+  </table>
+    <form action="{% url 'dfth_addincome' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增收入</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>合同编号:</label></td>
+          <td><input type="text" name="contractid" /></td>
+        </tr>
+        <tr>
+          <td><label>收入金额:</label></td>
+          <td><input type="text" name="number" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form></br>
+  <h4>支出记录&emsp;<a href="javascript:print3()" rel="external nofollow" target="_self">打印</a></h4>
+  <div id="div3"><table>
+    <tr><th>支出流水号</th><th>申请人</th><th>支出类型</th><th>备注</th><th>支出金额</th><th>更新日期</th><th>审批状态</th></tr>
+    {% for e in expense %}
+    <tr><td>{{ e.id }}</td>
+      <td>{{ e.username }}</td>
+      <td>{% if e.type == 'gz' %}工资{% elif e.type == 'clf' %}差旅费{% elif e.type == 'kq' %}客情{% elif e.type == 'scxg' %}生产相关{% elif e.type == 'bgfy' %}办公费用{% elif e.type == 'cf' %}餐费{% elif e.type == 'ygcf' %}员工餐费{% elif e.type == 'fz' %}房租{% elif e.type == 'ygflf' %}员工福利费{% elif e.type == 'ygpxf' %}员工培训费{% elif e.type == 'yf' %}运费{% elif e.type == 'ggxcf' %}广告宣传费{% elif e.type == 'jtf' %}交通费{% elif e.type == 'yjf' %}邮寄费{% elif e.type == 'fwf' %}服务费{% elif e.type == 'sdf' %}水电费{% elif e.type == 'gdfh' %}股东分红{% elif e.type == 'ryf' %}燃油费{% elif e.type == 'tcf' %}停车费{% elif e.type == 'qcxlf' %}汽车修理费{% elif e.type == 'qcbxf' %}汽车保险费{% elif e.type == 'nzjj' %}年终奖金{% elif e.type == 'dfylk' %}垫付原料款{% else %}其它支出{% endif %}</td>
+      <td>{{ e.reason }}</td>
+      <td>{{ e.number }}</td>
+      <td>{{ e.date|date:"Ymd" }}</td>
+      <td id="{{ e.id }}">{% if e.status == 1 %}已审核{% if 'C' in login_user.auth %}&emsp;<a onclick='dopay({{ e.id }})'>打款</a>{% endif %}{% elif e.status == 2 %}已驳回{% elif e.status == 3 %}已打款{% else %}未审核{% if 'X' in login_user.auth %}&emsp;<a onclick='doapprove({{ e.id }})'>批准</a>&emsp;<a onclick='dodecline({{ e.id }})'>驳回</a>{% endif %}{% endif %}</td>
+    {% endfor %}
+  </table></div>
+    <form action="{% url 'dfth_addexpense' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增支出</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>支出类型:</label></td>
+          <td><select class="order_select" name="type">
+                <option value ="" selected="selected"></option>
+                <option value ="gz">工资</option>
+                <option value ="scxg">生产相关</option>
+                <option value ="bgfy">办公费用</option>
+                <option value ="ygcf">员工餐费</option>
+                <option value ="ygflf">员工福利费</option>
+                <option value ="ygpxf">员工培训费</option>
+                <option value ="ggxcf">广告宣传费</option>
+                <option value ="fwf">服务费</option>
+                <option value ="sdf">水电费</option>
+                <option value ="gdfh">股东分红</option>
+                <option value ="qcxlf">汽车修理费</option>
+                <option value ="qcbxf">汽车保险费</option>
+                <option value ="nzjj">年终奖金</option>
+                <option value ="qtzc">其它支出</option>
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>原由:</label></td>
+          <td><input type="text" name="reason1" /></td>
+        </tr>
+        <tr>
+          <td><label>收款人:</label></td>
+          <td><input type="text" name="reason2" /></td>
+        </tr>
+        <tr>
+          <td><label>支出金额:</label></td>
+          <td><input type="text" name="number" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form>
+{% else %}
+<h1>当前帐号无权查看</h1>
+{% endif %}
+<script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+<script language="javascript"> 
+  function print1() { document.body.innerHTML=document.getElementById('div1').innerHTML;window.print(); }
+  function print2() { document.body.innerHTML=document.getElementById('div2').innerHTML;window.print(); }
+  function print3() { document.body.innerHTML=document.getElementById('div3').innerHTML;window.print(); }
+  function dopay(eid) {
+    $.get("{% url 'dfth_approvesubmit' %}", {eid:eid, action:3});
+    $("#"+eid).html('已打款');
+  }
+  function doapprove(eid) {
+    $.get("{% url 'dfth_approvesubmit' %}", {eid:eid, action:1});
+    $("#"+eid).html('已审核');
+  }
+  function dodecline(eid) {
+    $.get("{% url 'dfth_approvesubmit' %}", {eid:eid, action:2});
+    $("#"+eid).html('已驳回');
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+<view class="wrap flexbox-d-c">
+  <scroll-view class="scroll-y flex-1" scroll-y>
+    <view class="title flexbox-a-c">
+      <view>评分</view>
+      <view class="title-imgs flexbox-a-c">
+        <image wx:for="{{[0,0,0,0,0]}}" wx:key="{{index}}" src="../../images/star_whole.png" mode="aspectFit"></image>
+      </view>
+      <view class="title-num">99.8% 好评</view>
+    </view>
+    <view class="list">
+      <view wx:for="{{comments}}" wx:key="{{item}}" class="item">
+        <view class="item-top flexbox-a-c">
+          <image src="{{item.fields.pic}}" mode="aspectFill"
+            class="item-img"></image>
+          <view class="item-name">{{item.fields.name}}</view>
+          <view class="item-stars flexbox-a-c">
+            <image wx:for="{{[0,0,0,0,0]}}" wx:key="{{index}}" src="../../images/star_whole.png" mode="aspectFit"></image>
+          </view>
+        </view>
+        <!--<view class="item-time">
+          <text>2019-02-27 16:19:58</text>
+          <text>12盒*2提</text>
+        </view>-->
+        <view class="item-content">{{item.fields.detail}}</view>
+        <view wx:if='{{item.fields.link != ""}}' class="item-imgs flexbox-a-c">
+          <image src="{{item.fields.link}}" mode="aspectFill" data-url="{{item.fields.link}}" bindtap="tapPreviewImage"></image>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='title'>我来说两句</view>
+  <form bindsubmit='comment'>
+    <textarea class="texta" name='content' placeholder='成功下单后的首次评论赠予10元存入您的余额'></textarea>
+    <button class='paybtn' form-type='submit'>提交</button>
+  </form>
+</view>

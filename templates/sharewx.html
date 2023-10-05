@@ -1,0 +1,59 @@
+<html>
+<head><title>转发有礼 好奖等你拿</title></head>
+<style>
+body
+{ 
+background-image:url('{{ picture|safe }}');
+background-repeat:no-repeat;
+background-size:cover;
+background-position:center;
+}
+</style>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+function getParameterByName(name) {  
+    var match = RegExp('[?&]' + name + '=([^&]*)')  
+                    .exec(window.location.search);  
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));  
+}
+window.shareData = {
+    "imgUrl": "http://jyousoft.com/web/hongbao/logo.jpg",
+    "timeLineLink": "{{ event|safe }}",
+    "tTitle": "转发有礼，好奖等你拿",
+    "tContent": "快分享到朋友圈约小伙伴一起来试试吧！"
+};
+wx.config({
+    debug: false,
+    appId: '{{ appid }}',
+    timestamp: {{ jsp.timestamp }},
+    nonceStr: '{{ jsp.nonceStr }}',
+    signature: '{{ jsp.signature }}',
+    jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage']
+});
+wx.ready(function () {
+  wx.onMenuShareTimeline({
+    title: window.shareData.tTitle,
+    link: window.shareData.timeLineLink,
+    imgUrl: window.shareData.imgUrl,
+    success: function () {
+      document.location.href = "{{ link|safe }}"
+    },
+    cancel: function () {
+      alert("分享到朋友圈试试吧！");
+    }
+  });
+  wx.onMenuShareAppMessage({
+    title: window.shareData.tTitle,
+    link: window.shareData.timeLineLink,
+    imgUrl: window.shareData.imgUrl,
+    desc: window.shareData.tContent,
+    success: function () {
+      alert("分享到朋友圈试试吧！");
+    },
+    cancel: function () {
+      alert("分享到朋友圈试试吧！");
+    }
+  });
+});
+</script>
+</html>

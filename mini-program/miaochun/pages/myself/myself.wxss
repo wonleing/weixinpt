@@ -1,0 +1,118 @@
+/* myself.wxss */
+ .container{
+  width: 694.6rpx;
+  height: 100%;
+  padding-left: 27.7rpx;
+  padding-right: 27.7rpx;
+  overflow-y: scroll;
+  display: block;
+}
+.middle{
+  margin-top:-300rpx;
+  margin-left: 30%;
+  text-align: center;
+  width: 300rpx;
+  position: absolute;
+  background-color: #4cc04b;
+}
+.backimg{
+  width: 100%;
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+}
+.userinfo{
+  display: flex;
+}
+.userName{
+  position: absolute;
+  left: 50.72rpx;
+  line-height: 140.1rpx;
+}
+.userImage{
+  position: absolute;
+  right: 50.72rpx;
+}
+.userinfo-avatar {
+  flex: 1;
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  position: relative;
+  top: -80px;
+  right: 0;
+}
+.userinfo-nickname {
+  flex: 1;
+  position: relative;
+  top: -80px;
+  left: 0;
+  color: #040404;
+  font-size: 46.5rpx;
+  font-weight: bold;
+}
+.userinfo-balance {
+  flex: 1;
+  position: relative;
+  top: -50px;
+  left: 0;
+  color: #040404;
+  font-size: 40rpx;
+  font-weight: lighter;
+}
+.orderlist{
+  position: absolute;
+  left: 50.72rpx;
+  right: 50.72rpx;
+}
+.orderlist .listName{
+  width: 100%;
+  font-size: 32.61rpx;
+  line-height: 120rpx;
+  border-bottom: 1px solid #bebdbd;
+  position: relative;
+}
+.orderlist .listName:last-child{
+  border-bottom: none;
+}
+.orderlist .listName .iconfont{
+  position: absolute;
+  right: 5%;
+  top: 0;
+  color: #b3b3b3;
+  font-size: 56rpx;
+  line-height: 120rpx;
+}
+.orderlist .listName button{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: #fff;
+  font-size: 32.61rpx;
+  text-align: left;
+  background-color: #fff;
+  line-height: 120rpx;
+  border-bottom:1px solid #bebdbd;
+}
+.orderlist .listName button::after{
+   border: 0px;
+}
+.orderlist .listName .text{
+  position: absolute;
+  left: 0;
+  z-index: 10;
+}
+.button {
+  margin-top: 620rpx;
+  margin-left: 20px;
+  color: #eee;
+  background-color: #4cc04b;
+}
+.note-tip {
+    margin-left: 24rpx;
+    font-size: 32rpx;
+    margin-top: 26rpx;
+    line-height: 1.5;
+    color: #666;
+}

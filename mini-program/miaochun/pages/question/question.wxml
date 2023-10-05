@@ -1,0 +1,9 @@
+<view class='box'>
+  <view class='list' wx:for='{{questionList}}' wx:key='{{item}}'>
+    <view class='list-num'>{{item.pk}}、</view>
+    <view class='content'>
+      <view class='question'>{{item.fields.question}}</view>
+      <view class='answer'>{{item.fields.answer}}</view>
+    </view>   
+  </view>
+</view>

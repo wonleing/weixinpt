@@ -1,0 +1,115 @@
+﻿<html>
+<head>
+<link type="text/css" href="../../../static/css/single.css" rel="stylesheet" />
+<title>手机号抽奖系统</title>
+<script language="javascript">
+// global variables 
+//程序只需修改mobile的值，将手机号码按,分开
+var timer;
+var flag = new Array(100);
+var existingnum = new Array(100);
+var clickTimes = 0;
+var randnum;
+var cellnum =1;
+var mobile = new Array();
+// set data here!!
+mobile={{ phones }}
+var num = mobile.length-1;
+
+//得到mobile里面任意一个电话号码
+function getRandNum(){
+document.getElementById("result").value = mobile[GetRnd(0,num)];
+}
+
+function start()
+{
+clearInterval(timer);
+timer = setInterval('change()',50); 
+}
+function ok(){
+clearInterval(timer);
+}
+
+//生成一个随机数 介于min和max之间
+function GetRnd(min,max){
+ 
+randnum = parseInt(Math.random()*(max-min+1));
+return randnum;
+}
+
+//点击开始 setInterval(,10) 用来设置时间间隔
+function setTimer(){
+ timer = setInterval("getRandNum();",10);
+ document.getElementById("start").disabled = true;
+ document.getElementById("end").disabled = false;
+}
+
+//点击'停'按钮
+function clearTimer(){
+ noDupNum();
+ //clearInterval(对象) 清除已设置的setInterval对象 javascript事件, 
+ //timer是一个setInterval事件
+ clearInterval(timer);
+ //按钮状态改换
+ document.getElementById("start").disabled = false;
+ document.getElementById("end").disabled = true;
+ 
+}
+
+ //进行 停止的 初始化操作  1 实现从数组里面把已经获奖的人员电话号码删除 2 修改数组长度
+ function noDupNum(){
+ // to remove the selected mobile phone number
+ //从数组里面删除 randnum (电话号码)
+ mobile.removeEleAt(randnum);
+ 
+ // to reorganize the mobile number array!!
+ //再次改编电话号码数组
+ var o = 0;
+ for(p=0; p<mobile.length;p++){
+ if(typeof mobile[p]!="undefined"){
+ mobile[o] = mobile[p];
+ o++;
+ }
+ }
+ //修改电话号码长度
+ num = mobile.length-1;
+ }
+// method to remove the element in the array
+Array.prototype.removeEleAt = function(dx)
+ {
+ if(isNaN(dx)||dx>this.length){return false;}
+ this.splice(dx,1);
+ }
+
+// set mobile phone numbers to the table cell 
+//把电话号码显示到table里面
+function setValues(){
+ //cellnum 从1开始 id用进行命名的
+ var reg = /1(\d{2})\d{4}(\d{4})/g;
+ sstr = document.getElementById("result").value.replace(reg,"1$1****$2");
+ document.getElementById(cellnum).value = sstr ;
+ document.getElementById("result").value = sstr;
+ cellnum++;
+ }
+</script>
+</head>
+<body>
+<center>
+ <img id="banner" src="../../../static/pic/hk_bg.jpg" height="180"/><br/><br/>
+ <h1>中奖号码</h1>
+ <p>
+ <input id="result" type="text" size="30" style="height:130px;width:800px;border:2px solid red;font-size:120;" readonly/></p>
+ <p>
+ <input id="start" type="button" value="开始" style="border: 1px solid; border-color: #aaa 000 #000 #aaa;width:4em; background: #fc0;" onclick="setTimer()" />
+ <input id="end" type="button" value="停" style="border: 1px solid; border-color: #aaa 000 #000 #aaa;width:4em; background: #fc0;"onclick="clearTimer();setValues();" disabled/>
+</p>
+ <p><strong>{{ des }}</strong></p>
+ <table width="960" border="1">
+ <tr>
+ {% for n in num %}
+ <td style="text-align:center;"><input name="text{{ n }}" type="text" id="{{ n }}" style="height:30px;width:190px;border:1px solid red;font-size:25;" size="20" readonly/></td>
+ {% endfor %}
+ </table>
+<center>
+</body>
+</html>

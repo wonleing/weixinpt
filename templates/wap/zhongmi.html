@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>中蜜华兴</title>
+    <link rel="stylesheet" type="text/css" href="http://123.206.26.34/html/wap/zhongmi/wap.css" />
+</head>
+<body class="index_page">
+    <div class="header">
+        <div class="header_inner">
+            <img src="http://123.206.26.34/html/wap/zhongmi/header.png">
+        </div>
+    </div>
+    {% for i in items %}
+    <div class="banner_box">
+        <div class="inner">
+            <img src="{{ i.pic }}">
+            <div class="mov_con">
+                <div class="py_logo">
+                    <img src="http://123.206.26.34/html/wap/zhongmi/logo.png">
+                </div>
+                <div class="fn_box clearfix">
+                    <a href="javascript:;" class="fl share_btn">分享</a>
+                    <a href="javascript:;" class="fr zan_btn">赞</a>
+                </div>
+                <div class="txt">
+                    <a href="{{ i.link }}"><p>{{ i.description }}{% if i.price %}&emsp;<font color=red>￥{{ i.price }}</font>{% endif %}</p></a>
+                </div>
+            </div>
+            <div class="text">
+                <span class="s1">{{ i.title }}</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="footer j_footer_fixed footer_on">
+        <ul class="clearfix">
+            {% for c in cates %}
+            <li class="fl">
+                <a href="http://weixinpt.sinaapp.com/taobao_hxf/subpage/{{ c.id }}/">
+                    {{ c.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="javascript:;"  class="g_btn"><img src="http://123.206.26.34/html/wap/zhongmi/g_btn.png" class="in_animate_opa"></a>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/headroom.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/wap.js"></script>
+</body>
+</html>

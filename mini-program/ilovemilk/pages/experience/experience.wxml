@@ -1,0 +1,103 @@
+<view class='containers'>
+  <view class='swiper-container'>
+    <swiper class='swiper-wrapper' indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{memberlist}}" wx:key="item">
+        <swiper-item class='swiper-item' bindtap='memberDetail' id='{{item.pk}}'>
+          <image mode='aspectFill' src="{{item.fields.pic}}" class="slide-image"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--<view class='tool iconfont icon-gongjuxiang' catchtap='checktool'></view>-->
+  </view>
+
+  <view class='hot-recommend'>热卖产品</view>
+  <view class='box'>
+    <scroll-view wx:if="{{productlist}}" class="scroll-view_H" scroll-x style="width: auto">
+      <view class='image' wx:for="{{productlist}}" wx:key='item'>
+        <view bindtap='productDetail' id='{{item.pk}}' class='recommend'>
+          <view class='prodpic' style="background: url({{item.fields.pic}}) no-repeat;background-size: 100% 100%;">
+            <view class='popular-products'>{{item.fields.tag}}</view>
+            <view class='price'><text>{{item.fields.title}} ¥{{item.fields.price}}</text></view>
+          </view>
+          <view class='message'>
+            <view class='tit'>{{item.fields.description}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class='hot-recommend'>热门文章</view>
+  <view class='box'>
+    <scroll-view wx:if="{{articlelist}}" class="scroll-view_H" scroll-x style="width: auto">
+      <view class='image' wx:for="{{articlelist}}" wx:key='item'>
+        <view bindtap='articleDetail' id='{{item.pk}}' class='recommend'>
+          <view class='banner' style="background: url({{item.fields.pic}}) no-repeat;background-size: 100% 100%;">
+            <view class='popular-products'>{{item.fields.price}}</view>
+            <view class='price'><text>{{item.fields.title}}</text></view>
+          </view>
+          <view class='message'>
+            <view class='tit'>{{item.fields.description}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- loop for api floor/list -->
+  <view  wx:for="{{floorlist}}" wx:key='item' wx:for-index='key' class='feature'>
+    <view class='scenic'>{{item.name}}</view>
+    <view class='box'>
+      <scroll-view class="scroll-view_H" scroll-x style="width: auto">
+        <view bindtap='enterSubject' id='{{item.subject.subjectId}}' class='image'>
+          <view class='recommend' style="background: url({{item.subject.pic}}) no-repeat;background-size: 100% 100%;"></view>
+        </view><!--end of subject-->
+        <view wx:for="{{item.shopList}}" wx:key="sl" wx:for-item="sl" class='image'>
+          <view bindtap='enterDetail' id='{{sl.shopId}}' class='recommend'>
+
+            <view wx:if='{{sl.surface}}' class='banner' style="background: url({{sl.surface}}) no-repeat;background-size: 100% 100%;">
+              <view class='popular-products'>{{sl.promotionTag.name}}</view>
+              <view class='price'><text>{{sl.minimumCharge}}</text></view>
+            </view>
+            <view class='message'>
+              <view class='tit'>{{sl.shopName}}</view>
+              <view class='count'>
+                <text class='star'>
+                  <text wx:for='{{sl.stars}}' wx:key='ns' class='iconfont icon-star'>
+                  </text>
+                  <text wx:if='{{sl.half}}' class='iconfont icon-217-star-half'></text>
+                  <text>({{sl.score}}分)</text>
+                </text>
+                <text class='line'>|</text>
+                <text wx:if="{{sl.visitors > 100000}}">100000+人参与体验过</text>
+                <text wx:else>{{sl.visitors}}人参与体验过</text>
+              </view>
+              <view class='distance'>
+                <text class='types'>
+                    <text class='type' wx:for="{{sl.serviceTagList}}" wx:key='st' wx:for-item='st'>{{st.name}}</text>
+                </text>
+                <text class='meters'>
+                  <text class='distanceIcon iconfont icon-location_fill'></text>
+                  <text>距离您的位置</text>
+                  <text wx:if="{{sl.distance > 10000 && sl.distance < 100000}}" class='meter'>{{sl.distance/1000}}km</text>
+                   <text wx:elif="{{sl.distance < 100000}}" class='meter'>{{sl.distance}}m</text> 
+                  <text wx:else class='meter'>>100km</text>
+                </text>
+              </view>
+            </view>
+          </view>
+        </view><!--end of shops-->
+      </scroll-view>
+    </view>
+    <view class='show' bindtap='showAll' id='{{item.shopTypeId}}'>
+        <text class='showAll' data-shopText='{{item.linkName}}'>{{item.linkName}}</text>
+    </view>
+  </view>
+
+  <view class='active'>
+      <view wx:for="{{adlist}}" wx:key='item' bindtap='adDetail' class='pay-card'>
+          <view class='leyou' style="background: url({{item.pic}}) no-repeat;background-size: 100% 100%;"></view>
+      </view>
+  </view>
+</view>

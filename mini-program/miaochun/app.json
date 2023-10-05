@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/experience/showAll",
+    "pages/goods/index",
+    "pages/goods/evaluate",
+    "pages/goods/address",
+    "pages/goods/order",
+    "pages/goods/cart",
+    "pages/experience/enterSubject",
+    "pages/payticket/orderDetail",
+    "pages/question/question",
+    "pages/myself/myOrder",
+    "pages/myself/myself"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#515151",
+    "selectedColor": "#4cc04b",
+    "list": [
+      {
+        "pagePath": "pages/experience/showAll",
+        "selectedIconPath": "images/postcardselect.png",
+        "iconPath": "images/postcard.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/payticket/orderDetail",
+        "selectedIconPath": "images/experienceselect.png",
+        "iconPath": "images/experience.png",
+        "text": "充值"
+      },
+      {
+        "pagePath": "pages/myself/myself",
+        "selectedIconPath": "images/myselfselect.png",
+        "iconPath": "images/myself.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

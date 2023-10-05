@@ -1,0 +1,19 @@
+<view class="containers">
+    <view class='collect' wx:for='{{shops}}' wx:key='{{item}}' bindtap='enterdetail' id='{{item.productid}}'>
+      <view wx:if='{{item.tag}}' class='hot-recommend'>{{item.tag}}</view>
+        <view class='banner' style='background-image: url({{item.pic}});background-size: 100% 100%;'>
+          <view wx:if='{{item.price}}' class='price'>¥{{item.price}}</view>
+        </view>
+        <view class='detail'>
+          <view class='title'>{{item.title}}</view>
+          <view class='grade'>{{item.detail}}</view>
+          <!--<view class='distance' wx:if="{{item.distance > 10000 && item.distance < 100000}}">{{item.distance/1000}}km</view>
+          <view class='distance' wx:elif='{{item.distance > 100000}}'>>100km</view>
+          <view class='distance' wx:else>{{item.distance}}m</view>-->
+        </view>
+      </view>
+    <view class='{{isLoading?"loading":"hideLoding"}}'>
+      <text class='iconfont icon-loading'></text> 正在加载中~~~
+    </view>
+    <view class='more' wx:if="{{nomore}}">没有更多了~~~</view>
+</view>

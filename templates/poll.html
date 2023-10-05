@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<link type="text/css" href="../../../static/css/single.css" rel="stylesheet" />
+<title>调查问卷</title>
+<head>
+<body>
+<h2>请选择您关注的话题</h2>
+<form action="{% url 'live_hk_dopoll' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% if topics %}
+    {% for t in topics %}
+    <input type="checkbox" value="{{ t.id }}" name="choices">{{ t.description }}<br>
+    {% endfor %}
+    <input type="hidden" value="{{ uid }}" name="uid">
+    <p><input type="submit" value="提交" /></p>
+  {% else %}
+    <p>请在后台添加问题</p>
+  {% endif %}
+</form>
+</body>
+</html>

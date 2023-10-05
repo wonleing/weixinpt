@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>蓝光高清</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="telephone=no" name="format-detection" />
+        <meta content="false" id="twcClient" name="twcClient" />
+        <link href='../../../static/css/style.css' rel='stylesheet'/>
+        <style>
+            .swipe {
+                overflow: hidden;
+                visibility: hidden;
+                position: relative;
+            }
+            .swipe_wrap {
+                overflow: hidden;
+                position: relative;
+            }
+            .swipe_wrap > .swipe_obj {
+                float: left;
+                width: 100%;
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+    <div id='categorySwipe' class='swipe titleSwipe'>
+        <div class='swipe_wrap'>
+            <div class="swipe_obj" swipe_pagenum="0">
+                <div class="swipe_title">
+                    <div class="swipe_category pressed" id="0" swipe_pagenum="0">
+                        蓝光高清
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='movieSwipe' class='movieSwipe'>
+            <div class='swipe_wrap movie_single_page'>
+                <div class="swipe_obj" id="0" swipe_pagenum="2">
+                  <div class="movie_obj">
+                    {% for c in content %}
+                    <div class="swipe_image">
+                        <a href="{{ c.link }}{% if wxid %}&wxid={{ wxid }}{% endif %}">
+                        <img src="{{ c.pic }}" /></a>
+                        <div class="name">
+                            {{ c.title|truncatechars:11 }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    <script src="../../../static/js/jquery.js">
+    </script>
+    <script src='../../../static/js/swipe.js'>
+    </script>
+    <script src='../../../static/js/index.js'>
+    </script>
+</html>

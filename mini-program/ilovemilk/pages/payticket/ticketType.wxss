@@ -1,0 +1,32 @@
+body{font-size:12px; font-family:"黑体",Arial, Helvetica, sans-serif;color:#363636;}
+html, body, div, span, h1, h2, h3, h4, h5, h6, em, img, strong, sub, sup, tt,dd, dl, dt, form, label, table, caption, tbody, tfoot, thead, tr, th, td,ul,li,p,a{ margin: 0; padding: 0;  }
+	.container{
+		padding: 20px;
+	}
+	.title{
+		font-size: 24px;
+		text-align: center;
+	}
+	.title-small{
+		font-size: 15px;
+		line-height: 29px;
+		margin-top: 35px;
+	}
+	.text{
+		margin-top: 20px;
+	}
+	.text div{
+		text-indent: 1rem;
+		font-size: 15px;
+		line-height: 29px;
+	}
+	p{
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.alt{
+		font-weight: normal;
+	}
+	span{
+		background-color: yellow;
+	}

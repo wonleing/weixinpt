@@ -1,0 +1,28 @@
+/**app.wxss**/
+@import 'iconfont/iconfont.wxss';
+@import 'style/flexbox.wxss';
+
+page{
+  height: 100%;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+.wrap {
+  height: 100%;
+}
+.m-hide {
+  display: none;
+}
+.m-show {
+  display: block;
+}
+.scroll-y {
+  min-height: 0;
+}

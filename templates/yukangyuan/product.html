@@ -1,0 +1,81 @@
+{% extends "yukangyuan/base.html" %}
+{% block pagebody %}
+  <center>
+    <div class="category" id="category">
+      <li></li>
+      <li style="left:23%;"><a href="?customerid={{ customer }}&cate={{ cates.0 }}">{{ cates.0 }}</a></li>
+      <li style="left:31%;"><a href="?customerid={{ customer }}&cate={{ cates.1 }}">{{ cates.1 }}</a></li>
+      <li style="left:43%;"><a href="?customerid={{ customer }}&cate={{ cates.2 }}">{{ cates.2 }}</a></li>
+      <li style="left:51%;"><a href="?customerid={{ customer }}&cate={{ cates.3 }}">{{ cates.3 }}</a></li>
+      <li style="left:59%;"><a href="?customerid={{ customer }}&cate={{ cates.4 }}">{{ cates.4 }}</a></li>
+      <li style="left:71%;"><a href="?customerid={{ customer }}&cate={{ cates.5 }}">{{ cates.5 }}</a></li>
+      <li style="left:83%;"><a href="?customerid={{ customer }}&cate={{ cates.6 }}">{{ cates.6 }}</a></li>
+    </div>
+    <div class="listData" id="wrapper"><div id="scroller">
+      {% for p in products %}
+      <div class="_list">
+        <div class="_imgDiv" onclick="openContent('{{ p.detail }}',event);">
+          <img src="{{ p.pic }}" width="120px" style="vertical-align:middle;"/>
+        </div>
+        <div class="_textDiv">
+          <h4 style="margin-top:2px; margin-bottom:2px;">{{ p.name }}</h4>
+          <span style="font-size:12px;color:#595757;">
+          编号：{{ p.code }}&emsp;类型：{{ p.type }}</br>
+          库存：{{ p.storage }}&emsp;&emsp;价格：{{ p.price }}</br>
+          <form id="{{ p.productid }}" action="{% url 'yukangyuan_addproduct' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <input type="hidden" name="price" value="{{ p.price }}"/>
+            <input type="hidden" name="customerid" value="{{ customer }}"/>
+            <input type="hidden" name="productid" value="{{ p.productid }}"/>
+            <input class="min" name="" type="button" value="-" />
+            <input class="text_box" name="num" type="text" size="5" value="1" style="text-align:center;" />
+            <input class="add" name="" type="button" value="+" /></br>
+            <button onclick="addproduct('{{ p.productid }}');return false;" class="_upload_btn" style="font-size:14px;">购买</button>
+          </form>
+          </span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div id="content_img">
+      <img src="" width="100%" onclick="closeContent(this);"/>
+    </div>
+  </center><br/>
+  <div style="position:fixed;right:5%;top:70%;">
+    <input type=button onclick="window.open('../customer/?customerid={{ customer }}');" class="_upload_btn" style="font-size:16px;background-color:orange;" value="订单/结算"/>
+  </div> 
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script>
+  $(function(){
+    $(".add").click(function(){
+      var t=$(this).parent().find('input[class*=text_box]');
+      t.val(parseInt(t.val())+1);
+    })
+    $(".min").click(function(){
+      var t=$(this).parent().find('input[class*=text_box]');
+      t.val(parseInt(t.val())-1);
+      if(parseInt(t.val())<0){t.val(0);}
+    })
+  })
+  function addproduct(x){
+      $.post($('#'+x).attr("action"),
+        $('#'+x).serialize(),
+        function (data) {
+          alert(data);
+        });
+  }
+  function openContent(x,event){
+    var u = navigator.userAgent;
+    var IOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    if (IOS){
+      document.getElementById("content_img").getElementsByTagName("img")[0].src=x;
+      document.getElementById("content_img").style.display="block";
+      document.getElementById("content_img").style.top=(event.screenY-event.clientY)+"px";
+    } else {
+      window.open(x);
+    }
+  }
+  function closeContent(x){
+    x.parentNode.style.display="none";
+  }
+  </script>
+{% endblock %}

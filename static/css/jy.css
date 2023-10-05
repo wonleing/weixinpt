@@ -1,0 +1,530 @@
+@charset "utf-8";
+/* CSS Document */
+
+html{
+        font-size:80%;
+	font-family:Arial,"宋体";
+        height:100%;
+        width:100%;
+}
+body{
+	margin:0;
+	padding:0;
+	width:100%;
+	height:100%;
+}
+a:link,a:visited {color: #00A0E9}
+h1,h2,h3,h4 {color: #00A0E9}
+input,select {font-size:12px;}
+
+#content_img{display:none;
+        position:absolute;
+        z-index:2;
+        width:100%;
+        text-align:center;
+        background-color:gray;
+        left:0px;}
+
+._accountinfo{
+        border-top:1px solid #00A0E9;
+        border-bottom:1px solid #00A0E9;
+        color:#00A0E9;
+        text-align:center;
+}
+
+._code_page{
+	background-color:#00A0E9;
+}
+
+._logo{
+	margin-top:4%;
+	border-radius:50%;
+	border:1px solid #00A0E9;
+}
+
+._code_border{
+	margin-top:15px;
+	background:url(../pic/code_border.png) no-repeat;
+	background-size:100% 100%;
+	margin-left:auto;
+	margin-right:auto;
+	width:86%;
+	height:54%;
+	vertical-align:middle;
+	padding-top:7%;
+}
+
+._code_text_1{
+	color:#00A0E9;
+	margin:0;
+	padding:0;
+	font-weight:bold;
+	font-size:22px;
+}
+
+._code_text_2{
+	color:#9e9e9f;
+	margin:5px 0 0 0;
+	padding:0;
+	font-weight:bold;
+	font-size:15px;
+}
+
+@media only screen and (min-width:320px){
+	._code_text_1{
+		font-size:22px;	
+	}
+}
+
+@media only screen and (min-width:640px){
+	._code_text_1{
+		font-size:40px;	
+	}
+}
+
+@media only screen and (min-width:750px){
+	._code_text_1{
+		font-size:56px;	
+	}
+}
+
+@media only screen and (min-width:1242px){
+	._code_text_1{
+		font-size:105px;	
+	}
+}
+
+
+@media only screen and (min-width:320px){
+	._code_text_2{
+		font-size:12px;	
+	}
+}
+
+@media only screen and (min-width:640px){
+	._code_text_2{
+		font-size:40px;	
+	}
+}
+
+@media only screen and (min-width:750px){
+	._code_text_2{
+		font-size:17px;	
+	}
+}
+
+@media only screen and (min-width:1242px){
+	._code_text_2{
+		font-size:40px;	
+	}
+}
+
+
+._code{
+	
+}
+
+._pageEnd{
+	/*font-size:2em;*/
+	font-size:12px;
+	color:white;
+	margin-top:15px;
+}
+
+@media only screen and (min-width:320px){
+	._pageEnd{
+		font-size:12px;	
+	}
+}
+
+@media only screen and (min-width:640px){
+	._pageEnd{
+		font-size:40px;	
+	}
+}
+
+@media only screen and (min-width:750px){
+	._pageEnd{
+		font-size:17px;	
+	}
+}
+
+@media only screen and (min-width:1242px){
+	._pageEnd{
+		font-size:40px;	
+	}
+}
+
+._comment_page_2,_register_page,_list_page,_userDetail_page,_checkDetail_page,_charge_page{
+	background-color:#F7F7F7;
+}
+
+._item_1{
+	/*margin-left:15px;*/
+	text-align:center;
+}
+
+._item_1 span{
+	color:#888888;
+	font-size:12px;
+	font-weight:bold;
+	vertical-align:text-bottom;
+}
+
+._item_1 .input_phone{
+	border:0px;
+	width:240px;
+	height:29px;
+	font-size:14px;
+}
+
+._item_1 img {
+	vertical-align:text-bottom;
+}
+
+._comment_area{
+	width:245px;
+	height:99px;
+	resize:none;
+	font-size:12px;
+}
+
+._title{
+	margin-top:40px;
+	margin-bottom:3px;
+}
+
+._rg_border_1{
+	background:url(../pic/register_border.png) no-repeat;
+	background-size:100% 100%;
+	width:91%;
+	height:70%;
+}
+
+._rg_border_1 input{
+	border-color:#E6E6E7;
+	border-collapse:collapse;
+	border-spacing:0;
+	border-style:solid;
+	border-width:thin;
+	height:21px;
+}
+
+._rg_border_1 td{
+	font-size:12px;
+	font-weight:bold;
+	color:#00A0E9;
+}
+
+.category{
+	background:url(../pic/bar_index.png) no-repeat;
+	background-size:100% 100%;
+	width:94%;
+	height:30px;
+	margin-top:35px;
+}
+
+.category li{
+	display:inline-block;
+	position:absolute;
+	top:42px;
+	font-size:12px;
+	font-weight:bold;
+	color:white;
+}
+
+.category li a{
+	text-decoration:none;
+	color:white;
+}
+
+
+
+.category li:first-child{
+	background:url(../pic/index_logo.png) no-repeat;
+	background-size:100% 100%;
+	width:50px;
+	height:43px;
+	top:29px;
+	left:8%;
+}
+
+._list{
+	list-style-type:none;
+	border-top:1px solid #D0CFCF;
+	border-bottom:1px solid #D0CFCF;
+	width:89%;
+	margin-top:20px;
+}
+
+._list:not(:first-child){
+	margin-top:10px;
+}
+
+._imgDiv{
+	display:inline-block;
+	width:120px;
+}
+._textDiv{
+	display:inline-block;
+	text-align:left;
+	vertical-align:middle;
+	width:55%;
+}
+
+._textDiv p{
+	margin:0;
+	padding:0;
+}
+
+._userDetail_1{
+	/*background:url(../picuserDetail.png) no-repeat;*/
+	/*background-size:100% 100%;*/
+	margin-top:34px;
+	border:2px solid #ECECEC;
+	width:94%;
+	height:30%;
+	-moz-border-radius: 15px; 
+    -webkit-border-radius: 15px; 
+    border-radius:15px; 
+	background-color:white;
+}
+
+.update_table{
+	margin-top:20px;
+	width:96%;
+	font-size:12px;
+	color:#888888;
+}
+
+._userDetail_input{
+	border-color:#E6E6E7;
+	border-collapse:collapse;
+	border-spacing:0;
+	border-style:solid;
+	border-width:1px;
+	width:85%;
+        font-size:12px;
+}
+
+._userDetail_label{
+        width:20%;
+        text-align:center;
+        padding-left:10px;
+        font-size:12px;
+}
+
+._update_btn{
+	border:0;
+	background-color:#00A0E9;
+	-moz-border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    border-radius:5px; 
+	width:91%;
+	height:24px;
+	vertical-align:middle;
+}
+
+._update_table_2{
+	font-size:12px;
+	color:#888888;
+}
+
+.list_table{
+	font-size:0.7rem;
+	width:94%;
+	color:#888888;
+	cellspacing:0;
+	cellpadding:0;
+	border-collapse:collapse;
+}
+
+.list_table th{
+	text-align:center;
+	font-size:0.9rem;
+	border-top:1px solid #ECECEC;
+	border-bottom:1px solid #ECECEC;
+}
+
+.list_table td{
+	text-align:center;
+	border-bottom:1px solid #ECECEC;
+}
+
+._copyright{
+	font-size:1rem;
+	color:#888888;
+}
+
+._checkDetail_1{
+	margin-top:34px;
+	border:2px solid #ECECEC;
+	width:94%;
+	height:30%;
+	-moz-border-radius: 15px; 
+    -webkit-border-radius: 15px; 
+    border-radius:15px; 
+	background-color:white;
+}
+
+.check_table_1{
+	/*width:95%;*/
+	margin-top:8px;
+	color:#888888;
+	font-size:12px;
+	/*text-align:center;*/
+}
+
+._upload_btn{
+	border:0;
+	background-color:#00A0E9;
+	-moz-border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    border-radius:5px;
+	color:white;
+	font-weight:bold;
+}
+
+._check_btn{
+	border:0;
+	background-color:#00A0E9;
+	-moz-border-radius: 5px; 
+        -webkit-border-radius: 5px; 
+        border-radius:5px; 
+	width:86%;
+	height:24px;
+	vertical-align:middle;
+	color:white;
+	font-weight:bold;
+        white-space:nowrap;
+}
+
+._checkDetail_2{
+	/*width:95%;*/
+	color:#888888;
+	font-size:12px;
+	/*text-align:center;*/
+}
+
+._checkDetail_3{
+	margin-top:20px;
+	text-align:center;
+}
+
+._checkDetail_input_3{
+	border:0;
+	-moz-border-radius: 15px; 
+    -webkit-border-radius: 15px; 
+    border-radius:15px; 
+	border:2px solid #ECECEC;
+	width:60%;
+	height:27px;
+	padding-left:17px;
+}
+
+._charge_div_1{
+	margin-top:58px;
+	border:2px solid #ECECEC;
+	width:90%;
+	height:30%;
+	-moz-border-radius: 15px; 
+    -webkit-border-radius: 15px; 
+    border-radius:15px; 
+	background-color:white;
+}
+
+._charge_table_1{
+	width:88%;
+	color:#888888;
+	margin:10px 0;
+	font-size:12px;
+}
+
+._charge_table_1 td{
+	height:25px;
+}
+
+._charge_table_1 h4{
+	margin:0;
+	padding:0;	
+}
+
+._chargepage_input_1{
+	border:0;
+	-moz-border-radius: 15px; 
+    -webkit-border-radius: 15px; 
+    border-radius:15px; 
+	border:2px solid #ECECEC;
+	width:35%;
+	height:27px;
+	text-align:right;
+	padding-right:17px;
+	color:#F29600;
+	font-weight:bold;
+}
+
+._charge_btn{
+	border:0;
+	background-color:#00A0E9;
+	-moz-border-radius: 15px; 
+    -webkit-border-radius: 15px; 
+    border-radius:15px; 
+	width:87%;
+	height:30px;
+	vertical-align:middle;
+	color:white;
+	font-weight:bold;
+}
+
+._comment_list{
+	border-top:1px solid #DBDCDC;
+	/*border-bottom:1px solid #DBDCDC;*/
+	/*width:95%;*/
+	color:#3E3A39;
+}
+
+._comment_list:last-child{
+	/*border-top:1px solid #DBDCDC;*/
+	border-bottom:1px solid #DBDCDC;
+}
+
+._screen{
+	width:100%;
+	height:100%;
+	display:block;
+	position:absolute;
+	top:0px;
+	background-color:#9e9e9f;
+	filter:alpha(opacity:60);
+	opacity:0.6;
+	z-index:9999;
+	vertical-align:middle;
+	text-align:center;
+}
+
+._screen_btn{
+	border:0;
+	-moz-border-radius: 15px; 
+        -webkit-border-radius: 15px; 
+        border-radius:15px; 
+	width:46%;
+	height:77px;
+	vertical-align:middle;
+	color:white;
+	font-weight:bold;
+	margin-top:231px;
+	font-size:1.8rem;
+	background:url(../picscreen_btn.png) no-repeat;
+	background-size:100% 100%;
+	/*position:absolute;
+	top:50%;*/
+}
+
+._userDetail_photo{
+	background:none;
+	position:absolute;
+	top:14px;
+	left:50%;
+	margin-left:-27px;
+	width:54px;
+}

@@ -1,0 +1,38 @@
+
+.radio-group{
+  margin-top: 30%;
+  text-align: left;
+  padding-left: 110px;
+}
+.radio{
+  margin-top: 10px;
+  display:block;
+}
+.text{
+  text-align: center;
+  margin-top: 50px;
+}
+.button{
+  width: 240rpx;
+  height: 80rpx;
+  background-color: #4cc04b;
+  color: #fff;
+  font-size: 32.61rpx;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 50px;
+}
+.text .ie {
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-top: 20rpx;
+    height: 70rpx;
+    border: 1px solid #6F8FCA;
+}
+radio{
+  position: relative;
+  top: -4rpx;
+}

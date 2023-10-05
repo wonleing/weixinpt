@@ -1,0 +1,13 @@
+<view class='topBanner' style='background-image:url({{banner}});'></view>
+<view class="containers">
+  <view class='collect' wx:for='{{goods}}' wx:key='{{item}}' bindtap='enterdetail' id='{{item.id}}'>
+    <view class='banner' style='background-image: url({{item.pic}});'>
+      <view wx:if='{{item.tag}}' class='hot-recommend'>{{item.tag}}</view>
+    </view>
+    <view class='price'>￥{{item.price}}</view>
+    <view class='detail'>
+      <view class='title'>{{item.title}}</view>
+      <view class='des'>{{item.des}}</view>
+    </view>
+  </view>
+</view>

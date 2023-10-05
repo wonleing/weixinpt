@@ -1,0 +1,68 @@
+{% extends "yukangyuan/base.html" %}
+{% block pagebody %}
+  <center>
+    <div class="_checkDetail_1">
+      <form action="{% url 'yukangyuan_saler' %}" id="stat" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <table class="check_table_1">
+        <tr><td>开始时间<input type="text" size="10" name="stime" value="20170101"/></td>
+            <td>结束时间<input type="text" size="10" name="etime" value="20171231"/></td></tr>
+        <tr><td>商户名称<input type="text" size="10" name="cname"></td>
+            <td>品牌系列<select style="width:85px;" name="brand">
+                <option value="">全部</option>
+                {% for b in brands %}
+                <option value="{{ b }}">{{ b }}</option>
+                {% endfor %}
+            </select></td>
+        </tr>
+        <tr><td>商品名称<input type="text" size="10" name="ptitle"/></td>
+            <td><button id="submit" class="_upload_btn">汇总查询</button></td></tr>
+      </table></form>
+    </div><br/>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">订单记录(总计：{{ salertotal }}元)</h4>
+      <table class="list_table" style="text-align:center;">
+      <tr>
+        <th style="text-align:center;">客户名</th>
+        <th style="text-align:center;">订单数</th>
+        <th style="text-align:center;">总金额(元)</th>
+        <th style="text-align:center;">支持金额</th>
+        <th style="text-align:center;">退单数</th>
+        <th style="text-align:center;">总价值(元)</th>
+      </tr>
+      {% for c in cinfo %}
+      <tr>
+        <td><a href="../product/?customerid={{ c.cid }}" target="blank">{{ c.cid }}-{{ c.name }}</a></td>
+        <td>{{ c.b_num }}</td>
+        <td>{{ c.a_total }}</td>
+        <td>{{ c.s_total }}</td>
+        <td>{{ c.r_num }}</td>
+        <td>{{ c.r_total }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">工作报告</h4>
+      <form action="{% url 'yukangyuan_addreport' %}" id="addr" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <p class="_item_1"><textarea class="_comment_area" rows="5" cols="30" name="report"></textarea></p>
+        <input type="hidden" name="salerid" value="{{ login_user }}" />
+        <button id="submit" class="_upload_btn">提交报告</button>
+      </form>
+    </div>
+  </center><br/>
+  <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    var form = $('#addr');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+      return false;
+     });
+  });
+  </script>
+{% endblock %}

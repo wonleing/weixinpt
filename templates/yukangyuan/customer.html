@@ -1,0 +1,120 @@
+{% extends "yukangyuan/base.html" %}
+{% block pagebody %}
+  <center>
+    <div class="_checkDetail_1">
+      <form action="{% url 'yukangyuan_doorder' %}" id="doorder" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <h4 style="margin:10px 0 auto 0;font-size:1.3em;">订单确认</h4>
+      <table class="check_table_1">
+        {% for p in pending %}
+          <input type="hidden" name="detailids" value="{{ p.detailid }}"/>
+          <tr align="left"><td>{{ p.code }}-{{ p.name }} X {{ p.number }}</td><td>小计：￥{{ p.total }}</td>
+          <td><a href="#" onclick="deletes('{{ p.detailid }}');return false;">删除</a></td></tr>
+        {% endfor %}
+        <tr align="right"><td colspan="2"><font color="red">合计：￥{{ price }}</font></td></tr>
+        <tr align="center"><td colspan="2">地址<input type="text" name="address" size="35" value="{{ address }}"/></td></tr>
+        <tr align="center"><td colspan="2">备注<input type="text" name="note" size="35" value=""/></td></tr>
+        {% if ismysaler %}<tr align="center"><td colspan="2">折扣<input type="text" name="discount" size="35" value=""/></td></tr>{% endif %}
+        <input type="hidden" name="customerid" value="{{ customer }}"/>
+        <input type="hidden" name="total" value="{{ price }}"/>
+        <tr><td><input type="submit" name="cancel" value="取消订单"></td>
+            <td><input type="submit" name="confirm" value="确认订单"></td></tr>
+      </table></form>
+    </div><br/>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">订单记录</h4>
+      <table class="list_table" style="text-align:center;">
+      <tr>
+        <th style="text-align:center;">单号</th>
+        <th style="text-align:center;">总金额</th>
+        <th style="text-align:center;">日期</th>
+        <th style="text-align:center;">状态</th>
+        <th style="text-align:center;">操作</th>
+      </tr>
+      {% for o in order %}
+      <tr>
+        <td><a href="#" onclick="showdetail('{{ o.orderid }}');return false;">{{ o.orderid }}</a></td>
+        <td>{{ o.total }}</td>
+        <td>{{ o.date|date:"Y-m-d h:m:s" }}</td>
+        <td>{% if o.status == 1 %}已下单{% elif o.status == 2 %}已录入{% else %}已结款{% endif %}</td>
+        <td>{% if o.status == 1 %}<a href="../delorder/?orderid={{ o.orderid }}">取消订单</a>{% endif %}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">市场支持</h4>
+      <table class="list_table">
+      <tr>
+        <th style="text-align:center;">原由</th>
+        <th style="text-align:center;width:150px;">详情</th>
+        <th style="text-align:center;">价值</th>
+        <th style="text-align:center;">日期</th>
+      </tr>
+      {% for s in support %}
+      <tr>
+        <td>{{ s.reason }}</td>
+        <td style="word-break:break-all;">{{ s.detail }}</td>
+        <td>{{ s.total }}</td>
+        <td>{{ s.date|date:"Y-m-d" }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">退货记录</h4>
+      <table class="list_table">
+      <tr>
+        <th style="text-align:center;width:180px;">明细</th>
+        <th style="text-align:center;">原由</th>
+        <th style="text-align:center;">价值</th>
+        <th style="text-align:center;">日期</th>
+      </tr>
+      {% for r in return %}
+      <tr>
+        <td style="word-break:break-all;">{{ r.detail }}</td>
+        <td>{{ r.reason }}</td>
+        <td>{{ r.total }}</td>
+        <td>{{ r.date|date:"Y-m-d" }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+
+    {% if ismysaler %}
+    <div style="margin-top:20px;">
+      <form action="{% url 'yukangyuan_dosupport' %}" id="dosupport" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <h4 style="margin:0 0 5px 0;">市场支持</h4>
+      <table class="list_table">
+        <tr><td>明细：<input type="text" name="detail"></td></tr>
+        <tr><td>原由：<input type="text" name="reason"></td></tr>
+        <tr><td>价值：<input type="text" name="total"></td></tr>
+        <tr><input type="hidden" name="customerid" value="{{ customer }}"/><td><input type="submit" value="提交"></td></tr>
+      </table></form>
+    </div>
+    <div style="margin-top:20px;">
+      <form action="{% url 'yukangyuan_doreturn' %}" id="doreturn" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <h4 style="margin:0 0 5px 0;">申请退货</h4>
+      <table class="list_table">
+        <tr><td>明细：<input type="text" name="detail"></td></tr>
+        <tr><td>原由：<input type="text" name="reason"></td></tr>
+        <tr><td>价值：<input type="text" name="total"></td></tr>
+        <tr><input type="hidden" name="customerid" value="{{ customer }}"/><td><input type="submit" value="提交"></td></tr>
+      </table></form>
+    </div>
+    {% endif %}
+  </center><br/>
+  <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script>
+  function showdetail(x){
+    //alert("{% url 'yukangyuan_getdetail' %}?orderid="+x);
+    $.get("{% url 'yukangyuan_getdetail' %}?orderid="+x, function(result){alert(result);})
+  }
+  function deletes(x){
+    $.get("{% url 'yukangyuan_deletedetail' %}?detailid="+x, function(result){alert(result);})
+    window.parent.location.reload();
+  }
+  </script>
+{% endblock %}

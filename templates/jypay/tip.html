@@ -1,0 +1,28 @@
+{% extends "jypay/base.html" %}
+{% block pagebody %}
+<title>评论打赏</title>
+</head>
+<body class="_charge_page">
+    <div align="center" style="margin-top:10px;">
+        <h4 style="margin:20px 0 auto 0;font-size:1.6rem;">尚未打赏的评论</h4><br/>
+        {% for c in comments %}{% if c.content %}
+        <div class="_comment_list">
+            <p style="text-align:left;width:100%;background-color:white;">&nbsp;&nbsp;&nbsp;<img src="{{ c.pic }}" width="13%" align="middle">&nbsp;&nbsp;<span style="font-size:1.6rem;">{{ c.name }}&emsp;{{ c.date|date:"Y-m-d" }}</span><span style="display:inline-block;text-align:right;color:#FDD017;font-size:1.5rem;font-weight:bold;float:right;margin-top:10px;padding-right:13px;">{{ c.status }}星</span></p>
+            <p><div style="position:absolut;text-align:left;font-size:1.7rem;width:75%;">{{ c.content }}</div>
+            <div style="float:right;width:18%;margin-top:-20px;"><button class="_update_btn" value="{{ c.commentid }}">
+            <span style="color:white;font-size:12px;font-weight:bold;">打赏</span></button></div></p>
+        </div>
+        {% endif %}{% endfor %}
+    </div>
+  <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $("._update_btn").click(function () {
+      $.post("{% url 'jypay_dotip' %}",{'commentid':$(this).val()},function(data){
+        alert(data);
+      });
+      $(this).parent().parent().hide();
+    });
+  });
+  </script>
+{% endblock %}

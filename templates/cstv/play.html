@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{{ title }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
+<link href="/static/cstv/base.css?v=2" rel="stylesheet" type="text/css" />
+</head>
+<div style="display:none;"><img src="{{ v.pic }}"></div>
+<body>
+<div class="video">
+    <video id="play_video" src="{{ v.link }}" width=640 height=480 webkit-playsinline controls="controls" poster="{{ v.pic }}"></video>
+</div>
+<image class="banner" src="{{ banner }}" />
+</br>
+<div class="info">
+    <p class="play_author">分类：{{ v.tag }}</p>
+    <p class="play_date">更新时间：{{ v.update }}</p>
+    <p class="play_detail">播放次数：{{ v.description }}</p>
+</div>
+<!--
+<script>
+$(function(){
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+    var appid = "8d3643577787865359d433b014d75e97";
+    $.get("/cstv/redirect/user_videoPlay_"+appid+"_"+getQueryString("video_id")+"/",{},function(result){
+                result=JSON.parse(result);
+                console.log(result);
+                render(result.data);
+            });
+//var result = <result of http://weixinpt.sinaapp.com/cstv/redirect/user_videoPlay_8d3643577787865359d433b014d75e97_[videoid]/>
+//sample: {"data":{"video_id":144,"video_name":"习大大外访","chn_id":33,"tag_id":27,"c_id":null,"video_author":"本网记者陈效卫","video_date":"2014-08-25","video_length":0,"video_url":"http://cache.zjcmcc.cnbn.cn/151/a0e06618331d22a8c695dff7ef5772db.m3u8"},"code":"N00000"};
+    function render(data){
+        document.title=data.video_name;
+        $(".header").html(data.video_name);
+        $(".author").html("<span>作者</span>："+data.video_author);
+        $(".date").html("<span>发布时间</span>："+data.video_date);
+        $("video").attr("src",data.video_url);
+        window.shareData = {
+                "imgUrl": "http://ww3.sinaimg.cn/cmw205/558fe6e3gw1em6wmra4gqj21d41d8n0m.jpg",
+                "timeLineLink": window.location.href,
+                "tTitle": data.video_name,
+                "tContent": data.video_name
+        };
+    }
+});
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                "img_url": window.shareData.imgUrl,
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function(res) {
+                alert('谢谢您的分享');
+            })
+        });
+        WeixinJSBridge.on('menu:share:timeline', function(argv) {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": window.shareData.imgUrl,
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function(res) {
+                alert('谢谢您的分享');
+            });
+        });
+    }, false)
+</script>
+-->
+</body></html>
+
+
+

@@ -1,0 +1,12 @@
+<!--experiene.wxml-->
+<view class='containers'>
+  <view class='toptext'>
+    <text class='title'>精选明信片</text>
+    <text class='alt'>送朋友一份来自异国他乡的祝福</text>
+  </view>
+  <view class='postcard'>
+      <scroll-view class="scroll-view_H" scroll-x style="width: auto">
+        <view class='postcardBanner' wx:for='{{postcard.list}}' wx:key='{{item}}' id="{{item.pic}}" data-info="{{item.detail}}" style='background-image: url({{item.pic}});background-size: 100% 100%;' bindtap='postcardDetail'></view>
+      </scroll-view>
+   </view>
+</view>

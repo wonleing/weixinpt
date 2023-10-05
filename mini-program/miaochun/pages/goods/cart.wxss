@@ -1,0 +1,100 @@
+.wrap {
+  font-size: 28rpx;
+}
+.tip {
+  background: #f4f4f4;
+  padding: 20rpx 40rpx;
+  font-size: 24rpx;
+}
+.tip view {
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+.tip view text:first-child {
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/servicePolicy-0ec842d966.png);
+  background-repeat: no-repeat;
+  width: 12rpx;
+  height: 12rpx;
+  background-size: 100%;
+  margin-right: 14rpx;
+}
+.list {
+  padding-bottom: 200rpx;
+}
+.item {
+  border-bottom: 25rpx solid #F4F4F4;
+}
+.item label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 40rpx 20rpx;
+}
+.item checkbox {
+  transform: scale(.7);
+  margin-right: 20rpx;
+}
+.item image {
+  width: 140rpx;
+  height: 140rpx;
+}
+.item-info {
+  line-height: 2;
+  margin-left: 20rpx;
+}
+.item-info view:nth-child(2) {
+  background: #FAFAFA;
+  font-size: 20rpx;
+  padding: 0rpx 10rpx;
+  border-radius: 3px;
+  color: #7F7F7F;
+}
+.item-add {
+  display: flex;
+  width: 128px;
+}
+.item-add text {
+  border: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 30rpx;
+  display: inline-block;
+  height: 52rpx;
+  text-align: center;
+  line-height: 52rpx;
+  flex: 1;
+}
+.item-add input {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-left: 0;
+  border-right: 0;
+  height: 52rpx;
+  text-align: center;
+  line-height: 52rpx;
+}
+.handle {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #f4f4f4;
+  font-size: 28rpx;
+}
+.handle-btn {
+  background: #b4282d;
+  color: #fff;
+  padding: 36rpx 80rpx;
+}
+.handle-price {
+  color: #b4282d;
+}
+.handle-info {
+  flex: 1;
+  padding: 0 20rpx;
+  color: #7f7f7f;
+}
+.handle-info checkbox {
+  transform: scale(.7);
+}

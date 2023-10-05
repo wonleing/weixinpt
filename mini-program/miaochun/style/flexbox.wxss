@@ -1,0 +1,30 @@
+.flexbox, .flexbox-d-c, .flexbox-j-c, .flexbox-j-b, .flexbox-j-a, .flexbox-a-c {
+    display: -webkit-flex;
+    display: flex;
+}
+.flexbox-d-c {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+.flexbox-j-c {
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.flexbox-j-b {
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.flexbox-j-a {
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+.flexbox-a-c {
+    -webkit-align-items: center;
+    align-items: center;
+}
+.flex-1 {
+    flex: 1;
+}
+.flex-none {
+    flex: none;
+}

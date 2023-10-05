@@ -1,0 +1,27 @@
+<view class="wrap">
+  <view class="list">
+    <view class="item">
+      <input type="text" placeholder="姓名" />
+    </view>
+    <view class="item">
+      <input type="text" placeholder="详细地址" />
+    </view>
+    <view class="item flexbox address">
+      <view>北京市</view>
+      <view>朝阳区</view>
+      <view>三间房</view>
+    </view>
+    <view class="item">
+      <input type="text" placeholder="详细地址，如楼道、楼盘号等" />
+    </view>
+  </view>
+  <view class="set">
+    <checkbox-group>
+      <label class="flexbox-a-c">
+        <checkbox />
+        <text>设为默认地址</text>
+      </label>
+    </checkbox-group>
+  </view>
+  <view class="save" bindtap="saveAddress">保存</view>
+</view>

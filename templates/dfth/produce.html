@@ -1,0 +1,152 @@
+{% extends "dfth/base.html" %}
+{% block pagebody %}
+{% if 'A' in login_user.auth %}
+  <form action="{% url 'dfth_produce' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <input type="text" name="word" /><input type="submit" value="模糊查找" />
+  </form>
+    <form action="{% url 'dfth_addconsume' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增领用</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>原料名称:</label></td>
+          <td><select class="order_select" name="sourcename">
+                <option value ="" selected="selected"></option>
+                {% for i in source %}
+                <option value ="{{ i.sourcename }}">{{ i.sourcename }}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>领用数量:</label></td>
+          <td><input type="text" name="number" /></td>
+        </tr>
+      </table>
+      <input type="hidden" name="employeename" value="{{ login_user.employeename }}"/>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form></br>
+  <h4>原料领用记录<h4>
+  <table>
+    <tr><th>流水号</th><th>原料名称</th><th>领用员工</th><th>领用数量</th><th>日期</th></tr>
+    {% for c in consume %}
+    <tr><td>{{ c.id }}</td>
+      <td>{{ c.sourcename }}</td>
+      <td>{{ c.employeename }}</td>
+      <td>{{ c.number }}</td>
+      <td>{{ c.date|date:"Ymd" }}</td>
+    {% endfor %}
+  </table>
+  <h4>原料库存<h4>
+  <table>
+    <tr><th>原料名称</th><th>库存数量</th><th>单位</th></tr>
+    {% for s in source %}
+    <tr><td>{{ s.sourcename }}</td>
+      <td>{{ s.number }}</td>
+      <td>{{ s.type }}</td>
+    {% endfor %}
+  </table></br>
+  <h4>产品库存<h4>
+  <table>
+    <tr><th>产品名称</th><th>库存数量</th><th>单位</th></tr>
+    {% for s in product %}
+    <tr><td>{{ s.productname }}</td>
+      <td>{{ s.number }}</td>
+      <td>{{ s.type }}</td>
+    {% endfor %}
+  </table></br>
+  <h4>设备列表<h4>
+  <table>
+    <tr><th>设备编号</th><th>设备名称</th><th>购买日期</th><th>价格</th></tr>
+    {% for d in device %}
+    <tr><td>{{ d.deviceid }}</td>
+      <td>{{ d.devicename }}</td>
+      <td>{{ d.buydate }}</td>
+      <td>{{ d.price }}</td>
+    {% endfor %}
+  </table></br>
+  <h4>产出入库</h4>
+  <table>
+    <tr><th>产出流水号</th><th>产品名称</th><th>数量</th><th>有效期至</th><th>产出日期</th></tr>
+    {% for p in produce %}
+    <tr><td>{{ p.id }}</td>
+      <td>{{ p.productname }}</td>
+      <td>{{ p.number }}</td>
+      <td>{{ p.keepdate }}</td>
+      <td>{{ p.date|date:"Ymd" }}</td>
+    {% endfor %}
+  </table>
+  <form action="{% url 'dfth_addproduce' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增入库</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>产品名称:</label></td>
+          <td><select class="order_select" name="productname">
+                <option value ="" selected="selected"></option>
+                {% for i in product %}
+                <option value ="{{ i.productname }}">{{ i.productname }}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>产出数量:</label></td>
+          <td><input type="text" name="number" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form>
+  <h4>产品出库记录</h4>
+  <table>
+    <tr><th>出货流水号</th><th>产品名称</th><th>客户名称</th><th>合同编号</th><th>数量</th><th>单价</th><th>有效期至</th><th>出货日期</th></tr>
+    {% for s in sale %}
+    <tr><td>{{ s.id }}</td>
+      <td>{{ s.productname }}</td>
+      <td>{{ s.customername }}</td>
+      <td>{{ s.contractid }}</td>
+      <td>{{ s.number }}</td>
+      <td>{{ s.price }}</td>
+      <td>{{ s.keepdate }}</td>
+      <td>{{ s.date|date:"Ymd" }}</td>
+    {% endfor %}
+  </table>
+    <form action="{% url 'dfth_addsale' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增出库</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>产品名称:</label></td>
+          <td><select class="order_select" name="productname">
+                <option value ="" selected="selected"></option>
+                {% for i in product %}
+                <option value ="{{ i.productname }}">{{ i.productname }}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>合同编号:</label></td>
+          <td><select class="order_select" name="contractid">
+                <option value ="" selected="selected"></option>
+                {% for i in contract %}
+                <option value ="{{ i.contractid }}">{{ i.contractid }}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>出货数量:</label></td>
+          <td><input type="text" name="number" /></td>
+        </tr>
+        <tr>
+          <td><label>单价:</label></td>
+          <td><input type="text" name="price" /></td>
+        </tr>
+        <tr>
+          <td><label>有效期至:</label></td>
+          <td><input type="text" name="keepdate" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form>
+{% else %}
+<h1>当前帐号无权查看</h1>
+{% endif %}
+{% endblock %}

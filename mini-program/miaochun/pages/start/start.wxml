@@ -1,0 +1,10 @@
+<view class="containers">
+  <image animation="{{animationData}}" class='banner' src='{{bootimg}}' style='left: {{leftValue}}rpx;' />
+  <!--<view class='titleIcon'>
+    <image mode='widthFix' src=''></image>
+  </view>-->
+  <button open-type="getUserInfo" bindgetuserinfo='startProject' class="start">点击登录</button>
+    <!--<view class="typeIcon">
+      <image mode='widthFix' src=''></image>
+    </view>-->
+</view>

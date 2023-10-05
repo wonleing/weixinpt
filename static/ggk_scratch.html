@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta content="width=320,minimum-scale=1.0" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="telephone=no" name="format-detection" />
+        <title>刮刮卡</title>
+        <style type="text/css">
+            * {
+                padding: 0;
+                margin: 0;
+                font-family: "Microsoft YaHei", 微软雅黑, "Microsoft JhengHei", 华文细黑, STHeiti, MingLiu;
+            }
+            
+            .main {
+                width: 320px;
+                margin: 0 auto;
+                background: #fff;
+                padding: 0 auto;
+                background: url(pic/ggk_bg.jpg);
+                height: 480px;
+                background-size: 100% 100%;
+				text-align: center;
+            }
+            
+            .main .top {
+                height: 210px;
+                width: 100%;
+            }
+            
+            .main .center .content {
+                background: #fdffda;
+                margin: 10px;
+                height: 80px;
+                width: 235px;
+                border: 1px solid #d8d6c2;
+                z-index: 999;
+                text-align: center;
+                margin-left: 40px;
+            }
+            
+            .main .center .content .title {
+                font-size: 20px;
+                line-height: 40px;
+                color: red;
+            }
+            
+            .main .center .content .button {
+                background-color: white;
+                color: #c57470;
+                width: 40%;
+                height: 30px;
+                border: 1px solid #d8d6c2;
+                float: left;
+                border-radius: 5px;
+                margin-top: 10px;
+                margin-left: 6%;
+                height: 40px;
+                line-height: 40px;
+            }
+            
+            .main .center .content span {
+                color: red;
+            }
+            
+            .main .center .content .button.red {
+                background-color: #e64b2e;
+                border: 1px solid #c0553c;
+                color: white;
+            }
+            
+            .main .mask {
+                position: absolute;
+                height: 82px;
+                top: 220px;
+                width: 237px;
+                margin-left:40px;
+                z-index: 999;
+                color: white;
+                line-height: 82px;
+            }
+            
+            .main .bottom {
+                height: 130px;
+                margin: 20px;
+                margin-top: 20px;
+            }
+            
+            .main .bottom .title {
+                color: yellow;
+            }
+            
+            .main .bottom .content {
+                color: white;
+                font-size: 15px;
+            }
+        </style>
+		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="js/wScratchPad.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="main">
+            <div class="top">
+            </div>
+            <div class="center" id="centerText">
+            </div>
+            <div class="mask" id="mask">
+            </div>
+            <div class="bottom">
+                <p class="title">
+                    注意事项：
+                </p>
+                <p class="content">
+1. 中奖者请务必在微信中输入"姓名,手机号"(注意中间用逗号隔开)，活动后我们将根据此信息统一邮寄实物红包。<br>
+2. 此页面不作为中奖凭证，中奖以我们后台记录为准。中奖者亦可通过输入"姓名,手机号"的方式查询自己的红包额。<br>
+                </p>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        window.onload = function(){
+            document.getElementById("centerText").innerHTML = '<div class="content">' +
+            '<p class="title">500元万达红包</p>' +
+            '<p>请在微信中输入"姓名,手机号"(注意中间用逗号隔开)以便联系</p>' +
+            '</div>';
+        }
+		
+		var zjl = false;
+			var num = 0;
+			var goon = true;
+			$(function() {
+				$("#mask").wScratchPad({
+					width: 237,
+					height: 82,
+					color: "#a9a9a7",
+					scratchMove: function() {
+						num++;
+						if (num == 2) {
+						}
+
+						if (zjl && num > 5 && goon) {
+							goon = false;
+							$("#zjl").slideToggle(500);
+						}
+					}
+				});
+			});
+    </script>
+</html>

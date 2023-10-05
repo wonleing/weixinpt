@@ -1,0 +1,78 @@
+.section{
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+  padding: 32.27rpx 27.7rpx;
+}
+.section .title{
+  font-size: 50rpx;
+  font-weight: bold;
+  margin-left: 40rpx;
+}
+.section .movieBox .movie{
+  width: 100%;
+}
+.section .swiper-wrapper{
+  width: 100%;
+  height: 500rpx;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 50rpx;
+}
+.section .swiper-wrapper .banner{
+  width: 100%;
+  display: flex;
+}
+.section .content{
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}
+.section .content view{
+  color: #010101;
+  line-height: 47rpx;
+}
+.section .content .price{
+  color: #f50;
+  font-size: 42rpx;
+  font-weight: bold;
+}
+.section .content .heart{
+  float: right;
+  right: 50rpx;
+  margin-top: -30rpx;
+  top: 30rpx;
+  font-size: 48rpx;
+  z-index: 10;
+}
+.section .content .heartSelected{ 
+  float: right;
+  right: 50rpx;
+  margin-top: -30rpx;
+  color: red;
+  font-size: 48rpx;
+  z-index: 10;
+}
+.section .content .text{
+  color: #000;
+  font-size: 27.8rpx;
+  font-weight: normal;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+.section .count{
+  align-content: center;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.section .count .button{
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border: 1px solid #f0f0f0;
+  border-radius: 100%;
+  background-color: #ccc;
+  position: relative;
+}

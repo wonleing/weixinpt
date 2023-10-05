@@ -1,0 +1,70 @@
+<view class="wrap flexbox-d-c">
+  <scroll-view class="scroll-y flex-1" scroll-y>
+    <view class="line"></view>
+    <view class="info flexbox-j-b flexbox-a-c">
+      <view class="flexbox">
+        <view class="info-name">Fa1r</view>
+        <view class="info-phone">
+          <view>186****4541</view>
+          <view>北京市朝阳区三间房</view>
+        </view>
+      </view>
+      <view class="iconfont icon-you"></view>
+    </view>
+    <view class="br"></view>
+    <view class="list">
+      <view class="item">
+        <view>
+          <text>优惠券:</text>
+          <text>未选择</text>
+        </view>
+        <view>
+          <text>0张</text>
+          <text class="iconfont icon-you"></text>
+        </view>
+      </view>
+      <view class="item">
+        <view>商品合计</view>
+        <view>￥95.00</view>
+      </view>
+      <view class="item">
+        <view>运费</view>
+        <view>￥0.00</view>
+      </view>
+      <view class="item">
+        <view>活动优惠</view>
+        <view>-￥4.8</view>
+      </view>
+    </view>
+    <view class="br"></view>
+    <view class="goods">
+      <view class="goods-title flexbox-a-c">
+        <text>包裹1</text>
+        <text>18:40前完成支付，预计（明天）03月23日送达</text>
+      </view>
+      <view class="flexbox-j-b">
+        <view class="goods-info flexbox-a-c">
+          <image src="http://img4.imgtn.bdimg.com/it/u=132069243,3260518543&fm=26&gp=0.jpg" mode="aspectFill"></image>
+          <view>
+            <view class="goods-name">酸牛奶</view>
+            <view class="goods-type">12盒*2提</view>
+            <view class="goods-num">￥90.20</view>
+          </view>
+        </view>
+        <view>x1</view>
+      </view>
+    </view>
+    <view class="clause flexbox-a-c">
+      <label class="flexbox-a-c">
+        <checkbox color="#000000"></checkbox>
+        <text class="clause-sure">我同意</text>
+      </label>
+      <text class="clause-info">《严选平台服务协议》</text>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="handle flexbox-a-c">
+  <view class="flex-1">实付：￥90.20</view>
+  <view>付款</view>
+</view>

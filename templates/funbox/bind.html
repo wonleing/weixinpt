@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <link href="{{ STATIC_URL }}css/jy.css" rel="stylesheet" type="text/css" />
+        <title>商家微信绑定</title>
+    </head>
+<body class="_register_page">
+  <div align="center">
+    <h1 class="_title">商家微信绑定</h1>
+      <form id="regForm" action="{% url 'funbox_dobind' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <table>
+          <tr height="50px">
+            <input type="hidden" name="openid" value="{{ openid }}" />
+            <td width="80px" style="text-align:center;">&nbsp;渠道代号</td>
+            <td><input type="text" name="memberid" style="width:90%"/></td>
+          </tr>
+          <tr height="50px">
+            <td width="80px" style="text-align:center;">&nbsp;登录密码</td>
+            <td><input type="text" name="password" style="width:90%"/></td>
+          </tr>
+          <tr height="50px">
+            <td width="80px" style="text-align:center;">&nbsp;商户类型</td>
+            <td><select name="type" style="width:90%;">
+                <option value="1">购物</option>
+                <option value="2">美食</option>
+                <option value="3">丽人</option>
+                <option value="4">旅行</option>
+                <option value="5">休闲</option>
+                <option value="6">其它</option>
+            </select></td>
+          </tr>
+          <tr height="50px">
+            <td width="80px" style="text-align:center;">&nbsp;提现帐户</td>
+            <td><input type="text" name="account" style="width:90%"/></td>
+          </tr>
+          <tr height="50px">
+            <td width="80px" style="text-align:center;">&nbsp;推荐代号</td>
+            <td><input type="text" name="fromagent" style="width:90%"/></td>
+          </tr>
+        </table>
+        <center><button id="submit" class="_upload_btn">绑定</button></center>
+      </form>
+      新渠道注册时渠道代号密码均为自选，但更改绑定微信号时渠道代号密码须与之前的匹配；
+      商户类型与提现帐号须完整填写，一旦输入无法更改；
+      推荐代号为选填，没有的话可以不填写。
+    </div>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    var form = $('#regForm');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+        return false;
+     });
+  });
+  </script>
+  <br/>
+  <div align="center" style="color:#B4B4B5;font-size:12px;margin-top:25px;">本平台由<a style="color:#00A0E9" href="http://www.jyousoft.com">捷优软件</a>提供. <br/>Copyright 2013-2017. All rights reserved.</div>
+</body>
+</html>

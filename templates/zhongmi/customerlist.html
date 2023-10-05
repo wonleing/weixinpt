@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+{% load i18n %}
+<head>
+    <title>中蜜客户列表</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+</head>
+<body>
+    <div align="center">
+    <img class="logo" src="http://ww4.sinaimg.cn/mw690/558fe6e3gw1eyvli5ueqaj20en027dh0.jpg" width="810px" />
+    {% if login_user %}
+      <div style="float:right;">
+        <b>当前店号: {{ login_user }}</b> | <a href="/zhongmi/logout/"><b>登出</b></a>
+      </div>
+      <form action="{% url 'zhongmi_customerlist' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <input type="text" name="word" /><input type="submit" value="模糊查找" />
+        <input type="text" id="phone" /><button onclick="redirect();return false;">跨店查找</button>
+      </form>
+      <h4>会员列表</h4>
+      <table class="list_table">
+        <tr><th>客户号</th><th>姓名</th><th>电话</th><th>性别</th><th>年龄</th><th>等级</th><th>推荐人</th><th>总消费</th><th>积分</th></tr>
+        {% for c in customers %}
+        <tr>
+            <td>{{ c.customerid }}</td>
+            <td>{{ c.name }}</td>
+            <td><a href="../customer/?phone={{ c.phone }}">{{ c.phone }}</a></td>
+            <td>{{ c.gender }}</td>
+            <td>{{ c.age }}</td>
+            <td>{{ c.grade }}</td>
+            <td><a href="../customer/?phone={{ c.saler }}">{{ c.saler }}</a></td>
+            <td>{{ c.amount }}</td>
+            <td>{{ c.point }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <br/>
+      <br/>
+      <form action="{% url 'zhongmi_inputcustomer' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <fieldset class="add_fieldset">
+      <legend><h4>新增会员</h4></legend>
+      <table class="add_table" cellpadding="4" cellspacing="1" border="1">
+        <tr>
+          <td style="text-align:right;width:100px"><label>姓名:&emsp;&emsp;</label></td>
+          <td><input type="text" name="name" /></td>
+          <td style="text-align:right;width:100px"><label>电话:&emsp;&emsp;</label></td>
+          <td><input type="text" name="phone" /></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;"><label>性别:&emsp;&emsp;</label></td>
+          <td><input type="text" name="gender" /></td>
+          <td style="text-align:right;"><label>年龄:&emsp;&emsp;</label></td>
+          <td><input type="text" name="age" /></td>
+        </tr>
+        <tr>
+          <td style="text-align:right;"><label>地址:&emsp;&emsp;</label></td>
+          <td><input type="text" name="address" /></td>
+          <td style="text-align:right;"><label>推荐人电话:&emsp;</label></td>
+          <td><input type="text" name="saler" /></td>
+        </tr>
+        </table>
+        <input type="hidden" name="channelid" value="{{ login_user }}" />
+        <p class="bton"><input type="submit" value="保存" /></p>
+        </fieldset>
+      </form>
+      <br/>
+    {% else %}
+      <h4>用户登录</h4>
+      <form action="{% url 'zhongmi_dologin' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <label>分店号:&emsp;</label><input type="text" name="account" /><br>
+        <label>密码:&emsp;&emsp;</label><input type="password" name="password" /><br>
+        <p><input type="submit" value="登录" /></p>
+      </form>
+    {% endif %}
+    </div>
+    <hr/>
+    <div align="center"><font size="2">本平台由<a href="http://www.jyousoft.com">捷优软件</a>提供. Copyright 2013-2017. All rights reserved.</font></div>
+</body>
+<script language="javascript" type="text/javascript">
+function redirect(){
+    window.location="../customer/?phone="+document.getElementById('phone').value; 
+}
+</script>
+</html>

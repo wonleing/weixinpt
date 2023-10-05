@@ -1,0 +1,76 @@
+body {
+width: 98%;
+color:#333;
+font-size:16px;
+font-family: Arial, Helvetica, sans-serif;
+}
+.banner{
+width: 100%;
+height: auto;
+margin-bottom:20px;
+}
+.form_content{
+margin:2% 2%;
+padding:10px;
+}
+fieldset{
+border:1px #ebebeb solid;
+padding:15px 10px 15px 10px;
+margin:0 0 10px 0;
+}
+legend{
+color:#FFFFFF;
+background-color:#0fcdf6;
+padding:2px 5px 2px 5px;
+}
+.form-row {
+clear: both;
+padding:5px 5px 5px 5px;
+}
+.form-row-select {
+clear: both;
+padding:10px 5px 5px 5px;
+}
+.field-label {
+line-height:25px;
+}
+label {
+color:#666666;
+}
+label.left{
+padding:0 20px 0 5px;
+color:#666666;
+}
+.field-widget {
+}
+input.required{
+width:100%;
+height:25px;
+border: 1px solid #95E0EF;
+background-color:#f3fcfe;
+border-left-width:2px;
+padding:5px 0 0 2px;
+}
+select.validate-selection{
+width:100%;
+height:32px;
+border: 1px solid #95E0EF;
+background-color:#f3fcfe;
+border-left-width:2px;
+padding:4px 0 0 2px;
+}
+textarea.required{
+width:100%;
+height:75px;
+border: 1px solid #95E0EF;
+background-color:#f3fcfe;
+border-left-width:2px;
+}
+input.submit{
+font-size:16px;
+color:#FFFFFF;
+background-color:#0fcdf6;
+padding:2px 5px 2px 5px;
+cursor:pointer;
+border:none;
+}

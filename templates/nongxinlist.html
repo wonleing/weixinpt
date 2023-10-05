@@ -1,0 +1,23 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link title="style1" rel="stylesheet" href="{{ STATIC_URL }}css/baoming.css" type="text/css" />
+</head>
+<body>
+  <div class="form_content">
+    <img src="http://www.nongxinyin.com/nxy/resource/cms/2015/03/2015032410482772756.jpg" class='banner' />
+    <fieldset>
+      <legend>请选择培训项目</legend>
+      {% for px in pxlist %}
+      <div class="form-row">
+        <div class="field-label"><a href="?pxid={{ px.pxid }}">{{ px.pxname }}</a></div>
+      </div>
+      {% endfor %}
+    </fieldset>
+  </div>
+</body>
+</html>

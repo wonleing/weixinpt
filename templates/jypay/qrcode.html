@@ -1,0 +1,22 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" type="text/css" href="{{ cssfile }}" />
+  <title>收款二维码</title>
+ </head>
+<body class="_code_page">
+  <center>
+    <img class="_logo" src="{{ cinfo.logo }}" width="30%"/>
+    <div class="_code_border">
+      <p class="_code_text_1">{{ minfo.name }}</p>
+      <img class src="{{ baseurl }}{{ minfo.memberid }}" width="70%" style="max-width:445px;"/>
+      <p class="_code_text_2">微信扫码付款{% if cinfo.man != 0 %}，满{{ cinfo.man }}<font color='red'>返</font>{{ cinfo.jian }}{% endif %}</p>
+    </div>
+    <p class="_pageEnd">{{ f_name|safe }}提供技术支持</p>
+    <p class="_pageEnd">加盟/投诉电话：{{ f_phone }}</p>
+  </center>
+</html>

@@ -1,0 +1,160 @@
+.section{
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+  padding: 32.27rpx 27.7rpx;
+}
+.middle{
+  margin-top:-300rpx;
+  margin-left: 30%;
+  text-align: center;
+  width: 300rpx;
+  position: absolute;
+  background-color: #4cc04b;
+}
+.backimg{
+  width: 100%;
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+}
+.section .title{
+  font-size: 50rpx;
+  font-weight: bold;
+  margin-left: 40rpx;
+}
+.section .movieBox .movie{
+  width: 100%;
+}
+.section .swiper-wrapper{
+  width: 100%;
+  height: 500rpx;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 50rpx;
+}
+.section .swiper-wrapper .banner{
+  width: 100%;
+  display: flex;
+}
+.section .content{
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}
+.section .content view{
+  color: #010101;
+  line-height: 47rpx;
+}
+.section .content .price{
+  color: #f50;
+  font-size: 42rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+.section .content .heart{
+  float: right;
+  right: 50rpx;
+  margin-top: -30rpx;
+  top: 30rpx;
+  font-size: 48rpx;
+  z-index: 10;
+}
+.section .content .heartSelected{ 
+  float: right;
+  right: 50rpx;
+  margin-top: -30rpx;
+  color: red;
+  font-size: 48rpx;
+  z-index: 10;
+}
+.section .content .text{
+  color: #000;
+  font-size: 27.8rpx;
+  font-weight: normal;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+.title{
+  color: pink;
+  font-size: 35rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+}
+.texta{
+  width: 652rpx;
+  height: 180px;
+  border: solid 1px;
+  padding: 2px 6px;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 10px;
+}
+.detail{
+  width: 100%;
+  display: block;
+}
+.comment{
+  margin-top: 30rpx;
+  margin-left:30rpx;
+  margin-right:40rpx;
+  margin-bottom: 50rpx;
+}
+.comment .image{
+  height: 80rpx;
+  width: 80rpx;
+  /* margin-left: 80rpx; */
+  display: inline-block;
+}
+.comment .label{
+  color: gray;
+  font-size: 30rpx;
+  font-weight: normal;
+  margin-left: 30rpx;
+  display: inline-block;
+}
+.comment .talk {
+    color: #666;
+    font-size: 27.8rpx;
+    font-weight: normal;
+    display: block;
+    margin-top: 10rpx;
+    line-height: 1.5;
+    /* margin-left: 30rpx; */
+}
+.section .count{
+  align-content: center;
+  text-align: center;
+  margin-top: 45rpx;
+  margin-bottom: 45rpx;
+}
+.section .count .button{
+  display: inline-block;
+  width: 80rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius: 100%;
+  position: relative;
+  background-color: #eee;
+}
+.section .endblock{
+  text-align: center;
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+  margin-top: 20rpx;
+}
+.paybtn{
+  display: inline-block;
+  width: 250rpx;
+  text-align: center;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  color: #eee;
+  background-color: #4cc04b;
+}
+.num{
+  margin: 0 10rpx;
+}

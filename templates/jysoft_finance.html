@@ -1,0 +1,24 @@
+{% load i18n %}
+<head>
+    <title>捷优支付记帐系统</title>
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}pic/favicon.ico"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+</head>
+  <div style="width:100%; margin:0 auto; overflow:auto; _display:inline-block;">
+    <h4>请选择月份<h4>
+    {% for m in months %}
+    <a href="?year={{ m.year }}&month={{ m.month }}">{{ m.year }}-{{ m.month }}</a>&emsp;
+    {% endfor %}
+    <h4>收支表<h4>
+    <table><tr><th>年月</th><th>日期</th><th>收／付</th><th>摘要</th><th>收入</th><th>支出</th><th>经办／领款</th><th>备注</th></tr>
+    {% for i in income %} 
+      <tr><td>{{ i.year }}-{{ i.month }}</td><td>{{ i.day }}日</td><td>收</td><td>{{ i.summary }}</td><td>{{ i.amount }}</td><td></td><td>{{ i.user }}</td><td>{{ i.message }}</td></tr>
+    {% endfor %}
+    {% for e in expense %}
+        <tr><td>{{ e.year }}-{{ e.month }}</td><td>{{ e.day }}日</td><td>付</td><td>{{ e.summary }}</td><td></td><td>{{ e.amount }}</td><td>{{ e.user }}</td><td>{{ e.message }}</td></tr>
+    {% endfor %}
+    </table>
+    <h2>总收入：{{ t_income }}, 总支出：{{ t_expense }}, 总结余：<font color="red">{{ total }}</font></h2>
+  </div>
+<div align="center"><font size="2">http://www.jyousoft.com. Copyright 2013-2017. All rights reserved.</font></div>
+</body>

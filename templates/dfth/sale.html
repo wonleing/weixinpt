@@ -1,0 +1,162 @@
+{% extends "dfth/base.html" %}
+{% block pagebody %}
+{% if 'B' in login_user.auth %}
+  <form action="{% url 'dfth_sale' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <input type="text" name="word" /><input type="submit" value="模糊查找" />
+  </form>
+  <h4>产品库存<h4>
+  <table>
+    <tr><th>产品名称</th><th>库存数量</th><th>单位</th></tr>
+    {% for s in product %}
+    <tr><td>{{ s.productname }}</td>
+      <td>{{ s.number }}</td>
+      <td>{{ s.type }}</td>
+    {% endfor %}
+  </table></br>
+  <h4>客户信息</h4>
+  <table>
+    <tr><th>客户名称</th><th>客户类型</th><th>大区</th><th>所属地区</th><th>联系人</th><th>电话</th><th>地址</th><th>开票信息</th></tr>
+    {% for c in customer %}
+    <tr><td>{{ c.customername }}</td>
+      <td>{{ c.type }}</td>
+      <td>{{ c.district }}</td>
+      <td>{{ c.location }}</td>
+      <td>{{ c.contact }}</td>
+      <td>{{ c.phone }}</td>
+      <td>{{ c.address }}</td>
+      <td>{{ c.invoiceinfo }}</td>
+    {% endfor %}
+  </table>
+    <form action="{% url 'dfth_addcustomer' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增客户</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>客户名称:</label></td>
+          <td><input type="text" name="customername" /></td>
+        </tr>
+        <tr>
+          <td><label>客户类型:</label></td>
+          <td><input type="text" name="type" /></td>
+        </tr>
+        <tr>
+          <td><label>大区:</label></td>
+          <td><input type="text" name="district" /></td>
+        </tr>
+        <tr>
+          <td><label>所属地区:</label></td>
+          <td><input type="text" name="location" /></td>
+        </tr>
+        <tr>
+          <td><label>联系人:</label></td>
+          <td><input type="text" name="contact" /></td>
+        </tr>
+        <tr>
+          <td><label>电话:</label></td>
+          <td><input type="text" name="phone" /></td>
+        </tr>
+        <tr>
+          <td><label>地址:</label></td>
+          <td><input type="text" name="address" /></td>
+        </tr>
+        <tr>
+          <td><label>开票信息:</label></td>
+          <td><input type="text" name="invoiceinfo" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form></br>
+  <h4>合同列表</h4>
+  <table>
+    <tr><th>合同编号</th><th>客户名称</th><th>合同摘要</th><th>总金额</th><th>日期</th></tr>
+    {% for c in contract %}
+    <tr><td>{{ c.contractid }}</td>
+      <td>{{ c.customername }}</td>
+      <td>{{ c.summary }}</td>
+      <td>{{ c.total }}</td>
+      <td>{{ c.date|date:"Ymd" }}</td>
+    {% endfor %}
+  </table>
+    <form action="{% url 'dfth_addcontract' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增合同</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>合同编号:</label></td>
+          <td><input type="text" name="contractid" /></td>
+        </tr>
+        <tr>
+          <td><label>客户名称:</label></td>
+          <td><select class="order_select" name="customername">
+                <option value ="" selected="selected"></option>
+                {% for i in customer %}
+                <option value ="{{ i.customername }}">{{ i.customername }}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>合同摘要:</label></td>
+          <td><input type="text" name="summary" /></td>
+        </tr>
+        <tr>
+          <td><label>总金额:</label></td>
+          <td><input type="text" name="total" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form></br>
+  <h4>产品出库记录</h4>
+  <table>
+    <tr><th>出货流水号</th><th>产品名称</th><th>客户名称</th><th>合同编号</th><th>数量</th><th>单价</th><th>有效期至</th><th>出货日期</th></tr>
+    {% for s in sale %}
+    <tr><td>{{ s.id }}</td>
+      <td>{{ s.productname }}</td>
+      <td>{{ s.customername }}</td>
+      <td>{{ s.contractid }}</td>
+      <td>{{ s.number }}</td>
+      <td>{{ s.price }}</td>
+      <td>{{ s.keepdate }}</td>
+      <td>{{ s.date|date:"Ymd" }}</td>
+    {% endfor %}
+  </table>
+    <form action="{% url 'dfth_addsale' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>新增出库</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>产品名称:</label></td>
+          <td><select class="order_select" name="productname">
+                <option value ="" selected="selected"></option>
+                {% for i in product %}
+                <option value ="{{ i.productname }}">{{ i.productname }}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>合同编号:</label></td>
+          <td><select class="order_select" name="contractid">
+                <option value ="" selected="selected"></option>
+                {% for i in contract %}
+                <option value ="{{ i.contractid }}">{{ i.contractid }}</option>
+                {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>出货数量:</label></td>
+          <td><input type="text" name="number" /></td>
+        </tr>
+        <tr>
+          <td><label>单价:</label></td>
+          <td><input type="text" name="price" /></td>
+        </tr>
+        <tr>
+          <td><label>有效期至:</label></td>
+          <td><input type="text" name="keepdate" /></td>
+        </tr>
+      </table>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset></form>
+{% else %}
+<h1>当前帐号无权查看</h1>
+{% endif %}
+{% endblock %}

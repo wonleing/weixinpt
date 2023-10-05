@@ -1,0 +1,10 @@
+<html>
+    <p>批量导入数据</p>
+    <form action="{% url 'doupload' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>帐号:</label>&emsp;<input type="text" name="ac" size="30" /><br/>
+        <label>密码:</label>&emsp;<input type="password" name="pw" size="30" /><br/>
+        <label>文件:</label>&emsp;<input type="file" name="filepath" />
+        <p><input type="submit" value="上传" /></p>
+    </form>
+</html>

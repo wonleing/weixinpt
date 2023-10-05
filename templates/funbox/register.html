@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>商家注册</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jy.css" />
+</head>
+<body class="_register_page">
+  <div align="center">
+    <p class="_title"><img src="{{ STATIC_URL }}pic/register_title.png" width="70px"></p>
+      <form id="regForm" action="{% url 'funbox_doregister' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <table class="_rg_border_1">
+          <tr>
+          	<td colspan="2" height="20px"></td>
+          </tr>
+          <tr height="30px">
+            <td width="72px" style="text-align:center;">&nbsp;代理商号</td>
+            <td><input readonly="readonly" name="agent" style="width:90%;background-color:#EEEEEF" value="{{ agent }}" /></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">&nbsp;商户名称</td>
+            <td><input type="text" name="name" style="width:90%"/></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">&nbsp;初始密码</td>
+            <td><input type="text" name="password" style="width:90%"/></td>
+          </tr>
+          <tr>
+          	<td colspan="2" height="20px"></td>
+          </tr>
+        </table>
+        <table class="_rg_border_1" style="margin-top:15px;">
+          <tr>
+          	<td colspan="2" height="5px"></td>
+          </tr>
+          <tr><td colspan="2" style="color:#9E9E9F;font-size:12px;"><center>以下信息注册后不可修改，谨慎填写</center></td></tr>
+          <tr>
+          	<td colspan="2" height="5px"></td>
+          </tr>
+          <tr height="30px">
+            <td width="72px" style="text-align:center;">&nbsp;唯一标识</td>
+            <td><input type="text" name="memberid" style="width:90%"/></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">&nbsp;商户分类</td>
+            <td>
+              <select name="type" style="width:90%;height:25px;">
+                <option value="1">购物</option>
+                <option value="2">美食</option>
+                <option value="3">丽人</option>
+                <option value="4">旅行</option>
+                <option value="5">休闲</option>
+                <option value="6">其它</option>
+              </select>
+            </td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">&nbsp;提现帐号</td>
+            <td><input type="text" name="accountinfo" style="width:90%"/></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">&nbsp;消费满减</td>
+            <td>&nbsp;满&nbsp;<input type="text" name="man" style="width:30%"/>
+                &nbsp;减&nbsp;<input type="text" name="jian" style="width:30%"/></td>
+          </tr>
+          <tr>
+            <td colspan="2" height="20px"></td>
+          </tr>
+        </table>
+        <center><button style="background:url({{ STATIC_URL }}pic/register_btn.png) no-repeat;background-size:100% 100%;border:0;width:80%;height:28px;margin-top:15px;" id="submit"><span style="color:white;font-weight:bold;font-size:12px">提交信息</span></button></center>
+        </form>
+  <div align="center" style="color:#B4B4B5;font-size:12px;margin-top:25px;">本平台由<a style="color:#00A0E9" href="http://www.jyousoft.com">捷优软件</a>提供. <br/>Copyright 2013-2017. All rights reserved.</div>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    var form = $('#regForm');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+      return false;
+     });
+  });
+  </script>
+</body>
+</html>

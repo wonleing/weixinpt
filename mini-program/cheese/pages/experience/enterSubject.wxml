@@ -1,0 +1,13 @@
+<view class='topBanner' style='background-image:url({{banner}});background-size:100% 100%;'></view>
+<view class='view' wx:for='{{products}}' wx:key='item'>
+  <view class='viewBanner' bindtap="enterdetail" id="{{item.pk}}">
+    <view class='banner' style='background-image:url({{item.fields.pic}});background-size:100% 100%;'>
+      <view wx:if='{{item.fields.price}}' class='price'>¥{{item.fields.price}}</view>
+    </view>
+    <view class='message'>
+      <view class='tit'>{{item.fields.title}}</view>
+      <view class='count'>{{item.fields.description}}</view>
+      <view class='distance'>{{item.fields.tag}}</view>
+    </view>
+  </view>
+</view>

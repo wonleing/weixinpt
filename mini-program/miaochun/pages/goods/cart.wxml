@@ -1,0 +1,55 @@
+<view class="wrap flexbox-d-c">
+  <scroll-view class="scroll-y flex-1" scroll-y>
+    <view class="tip flexbox-a-c flexbox-j-b">
+      <view>
+        <text></text>
+        <text>30天无忧退货</text>
+      </view>
+      <view>
+        <text></text>
+        <text>48小时快速退款</text>
+      </view>
+      <view>
+        <text></text>
+        <text>满88元免邮费</text>
+      </view>
+    </view>
+    <view class="list">
+      <view class="item">
+        <label>
+          <view class="flexbox-a-c">
+            <view>
+              <checkbox color="#b4282d"></checkbox>
+            </view>
+            <view>
+              <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553779282&di=cfd4ee2b749fcf96b6057584a9cce48d&imgtype=jpg&er=1&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201312%2F05%2F20131205171905_2TAzM.jpeg" mode="aspectFill"></image>
+            </view>
+            <view class="item-info">
+              <view>酸牛奶</view>
+              <view>12盒*2提</view>
+              <view>￥90.20</view>
+            </view>
+          </view>
+          <view class="item-add">
+            <text>-</text>
+            <input type="text" value="1" />
+            <text>+</text>
+          </view>
+        </label>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="handle flexbox-a-c flexbox-j-b">
+  <view class="handle-info flexbox-a-c flexbox-j-b">
+    <view>
+      <label class="flexbox-a-c">
+          <checkbox color="#b4282d"></checkbox>
+          <text>已选(2)</text>
+        </label>
+    </view>
+    <view class="handle-price">￥90.20</view>
+  </view>
+  <view class="handle-btn" bindtap="createOrder">下单</view>
+</view>

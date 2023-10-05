@@ -1,0 +1,73 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.1",
+	"appid": "wx7c51dd558a1440a0",
+	"projectname": "miaochun",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "goods/index",
+					"pathName": "pages/goods/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "goods/evaluate",
+					"pathName": "pages/goods/evaluate",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "goods/address",
+					"pathName": "pages/goods/address",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "goods/order",
+					"pathName": "pages/goods/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "goods/cart",
+					"pathName": "pages/goods/cart",
+					"scene": null
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,185 @@
+{% extends "jypay/base.html" %}
+{% block pagebody %}
+  <title>商户中心</title>
+</head>
+<body class="_checkDetail_page">
+  <center>
+    <div class="_checkDetail_1">
+      <form action="{% url 'jypay_updateuser' %}" id="binfoForm" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="media-drop2">
+          <div id="droppedimage2">
+            <img src="{{ cinfo.logo }}" id="userlogo" width="62px" height="62px" style="position:absolute;z-index:2;top:6px;left:50%;margin-left:-31px;border-radius:31px;">
+          </div>
+          <div id="dropbox2" class="media-drop-placeholder" style="position:relative;z-index:3;opacity:0;left:20px;">
+            <input id="realUploadBtn2" name="media-drop-placeholder-file" type="file" accept="image/*" tabindex="-1"/>
+          </div>
+          <div style="position:relative;z-index:3;opacity:0;">
+            <input type="hidden" id="fname2" value="_center_{{ cinfo.centerid }}" />
+            <input type="hidden" name="logo" id="filename2" value="{{ cinfo.logo }}" />
+            <button id="resetupload2" class="btn">重新上传</button>
+          </div>
+        </div>
+      <h4 style="margin:20px 0 auto 0;font-size:1.6rem;">商户详情</h4>
+      <table class="check_table_1">
+        <tr>
+          <td style="vertical-align:top;min-width:50px;">评后海报</td>
+          <td>
+            <div class="media-drop1">
+              <div id="droppedimage1"><img id="bigbanner" src="{{ cinfo.pic }}" width="90%"/></div>
+              <div id="dropbox1" class="media-drop-placeholder">
+                <input id="realUploadBtn1" name="media-drop-placeholder-file" type="file" accept="image/*" tabindex="-1"/>
+              </div>
+              <input type="hidden" id="fname1" value="_center_{{ cinfo.centerid }}" />
+              <input type="hidden" name="pic" id="filename1" style="width:100%" value="{{ cinfo.pic }}" />
+              <button id="resetupload1" class="_upload_btn">重新上传</button>
+            </div>
+          </td>
+        </tr>
+        <tr style="height:30px;">
+            <td>商户名称</td>
+            <td><input type="text" name="name" value="{{ cinfo.name }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>商户描述</td>
+            <td><input type="text" name="description" value="{{ cinfo.description }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>登录密码</td>
+            <td><input type="text" name="password" value="{{ cinfo.password }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>商户电话</td>
+            <td><input type="text" name="phone" value="{{ cinfo.phone }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>渠道类1</td>
+            <td><input type="text" name="type1" value="{{ cinfo.type1 }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>渠道类2</td>
+            <td><input type="text" name="type2" value="{{ cinfo.type2 }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>渠道类3</td>
+            <td><input type="text" name="type3" value="{{ cinfo.type3 }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>渠道类4</td>
+            <td><input type="text" name="type4" value="{{ cinfo.type4 }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>渠道类5</td>
+            <td><input type="text" name="type5" value="{{ cinfo.type5 }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>渠道类6</td>
+            <td><input type="text" name="type6" value="{{ cinfo.type6 }}" style="width:84%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+            <td>消费满减</td>
+            <td>&nbsp;满&nbsp;<input type="text" name="man" value="{{ cinfo.man }}" style="width:30%"/>
+            &nbsp;减&nbsp;<input type="text" name="jian" value="{{ cinfo.jian }}" style="width:30%"/></td>
+        </tr>
+        <tr style="height:50px;">
+            <input type="hidden" name="centerid" value="{{ cinfo.centerid }}" />
+            <td colspan="2"><button type="submit" class="_check_btn">修改信息</button></td>
+        </tr>
+      </table>
+      <table class="_checkDetail_2">
+        <tr style="height:22px;">
+            <td style="width:65px;">唯一标识：</td>
+            <td style="width:90px;word-break:break-all;">{{ cinfo.centerid }}</td>
+            <td style="width:65px;">结算配置：</td>
+            <td style="word-break:break-all;">{% if cinfo.address and cinfo.pingid and cinfo.pingkey and cinfo.appid and cinfo.secret %}已完成{% else %}未完成{% endif %}</td>
+        </tr>
+        <tr style="height:22px;">
+            <td>未结算额：</td>
+            <td>{{ cinfo.balance }}</td>
+            <td>累计收入：</td>
+            <td>{{ cinfo.total }}</td>
+        </tr>
+        <tr style="height:22px;">
+            <td>到期时间：</td>
+            <td>{{ cinfo.endtime }}</td>
+            <td>渠道上限：</td>
+            <td>{{ cinfo.limit }}</td>
+        </tr>
+      </table>
+      </form>
+    </div><br/>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">业绩汇总</h4>
+      <table class="list_table">
+      <tr>
+        <th style="text-align:center;width:70px;word-break:break-all;">渠道</th>
+        <th style="text-align:center;">昨日收入</th>
+        <th style="text-align:center;">本月收入</th>
+        <th style="text-align:center;">总收入</th>
+        <th style="text-align:center;">未结额</th>
+        <th style="text-align:center;width:60px;">操作</th>
+      </tr>
+      {% for m in mlist %}
+      <tr class="row">
+        <td>{{ m.memberid }}<input name="memberid" type="hidden" value="{{ m.memberid }}"/></td>
+        <td>{{ m.yesterday }}</td>
+        <td>{{ m.thismonth }}</td>
+        <td>{{ m.total }}</td>
+        <td>{{ m.balance }}<input name="amount" type="hidden" value="{{ m.balance }}"/></td>
+        <td><input name="centerid" type="hidden" value="{{ cinfo.centerid }}"/>
+        <button class="_check_btn" type="submit">结算</button></td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div><br/>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">结账记录</h4>
+      <table class="list_table" style="text-align:center;">
+      <tr>
+        <th style="text-align:center;width:70px;word-break:break-all;">渠道</th>
+        <th style="text-align:center;">金额</th>
+        <th style="text-align:center;width:80px;word-break:break-all;">到账账号</th>
+        <th style="text-align:center;">日期</th>
+        <th style="text-align:center;width:30px;">状态</th>
+      </tr>
+      {% for o in outlist %}
+      <tr>
+        <td>{{ o.memberid }}</td>
+        <td>{{ o.amount }}</td>
+        <td><p style="word-break:break-all;">{{ o.accountinfo }}</p></td>
+        <td>{{ o.date|date:"Y-m-d H:i:s" }}</td>
+        <td>{% if o.status == 0 %}进行{% else %}完成{% endif %}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </div>
+  <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.html5uploader-1.1.js"></script>
+  <script src="{{ STATIC_URL }}js/exif.js"></script>
+  <script src="{{ STATIC_URL }}js/uploadimg2.js"></script>
+  <script>
+  $(document).ready(function () {
+    var form = $('#binfoForm');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+      return false;
+     });
+  });
+  $(function(){
+    $('.row button[type=submit]').click(function(){
+      var r=$(this).parents('.row');
+      $.ajax({type:'post',
+        url:'/jypay/doout/',
+        data:{centerid:r.find('[name=centerid]').val(), memberid:r.find('[name=memberid]').val(), amount:r.find('[name=amount]').val()},
+        success:function(a){alert(a)},
+        error:function(a,b){alert(b)}})
+    })
+  })
+  </script>
+{% endblock %}

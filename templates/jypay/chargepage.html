@@ -1,0 +1,90 @@
+{% extends "jypay/base.html" %}
+{% block pagebody %}
+<title>{{ minfo.name }}的收款台</title>
+</head>
+<body class="_charge_page">
+    <div align="center" style="margin-top:10px;">
+        <img src="{{ minfo.pic }}" style="width:95%;border-radius:27px;-webkit-border-radius:27px;-moz-border-radius:27px;" />
+        <img src="{{ logo }}" style="width:25%;position:relative;margin-top:-15%;margin-right:60%;border-radius:51%;" />
+        <h4 style="margin-top:-10%;margin-left:35%;font-size:1.5rem;position:relative;text-align:left;">{{ minfo.name }}</h4>
+        <div class="_charge_div_1">
+        	<table class="_charge_table_1">
+            	<tr>
+                    <td style="border-bottom:1px solid #888888;">
+                        <h4>特色/地址：{{ minfo.address }}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-bottom:1px solid #888888">
+                        <h4>详细信息：{{ minfo.description }}</h4>
+                    </td>
+                </tr>
+                {% if minfo.man > 0 and minfo.jian > 0 %}<tr>
+                    <td style="border-bottom:1px solid #888888">
+                        <h4>优惠信息：满{{ minfo.man }}<font color='red'>返</font>{{ minfo.jian }}</h4>
+                    </td>
+                </tr>{% endif %}
+                <tr>
+                    <td>
+                        <h4>联系电话：{{ minfo.phone }}</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br><h2 style="font-size:1.8rem;"><span style="color:#717071;">实付金额(元)</span>&nbsp;<input id="amount" type='number' value="" class="_chargepage_input_1" size="8" style="font-size:1.8rem" /></h2>
+        <h3><span style="color:#717071;">用户可用余额（支付时自动抵现)：{{ balance }}元</span></h3>
+        <center><button id="pay" class="_charge_btn" onclick="gopay();getElementById('pay').disabled=true;return true;">确认支付</button></center>
+        <h4 style="color:#717071;font-weight:200;">加盟/投拆电话：{{ f_phone }}</h4>
+        <p style="text-align:left;font-size:1.2rem;font-weight:bold;color:#888888;margin:40px 0 10px 0;">&nbsp;&nbsp;&nbsp;总计评论：{{ cnumber }} 星级：{{ crate }}</p>
+        {% for c in comments %}
+        <div class="_comment_list">
+            <p style="text-align:left;width:100%;background-color:white;">&nbsp;&nbsp;&nbsp;<img src="{{ c.image }}" referrerpolicy="no-referrer" width="13%" align="middle">&nbsp;&nbsp;<span style="font-size:1.2rem;">{{ c.dname }}&emsp;{{ c.date|date:"Y-m-d" }}</span><span style="display:inline-block;text-align:right;color:#FDD017;font-size:1.2rem;font-weight:bold;float:right;margin-top:10px;padding-right:13px;">{{ c.status }}星</span></p>
+            <p><div style="position:absolut;text-align:left;font-size:1.2rem;margin-left:5%;margin-right:5%">
+               {% if c.content %}{{ c.content }}{% else %}默认好评{% endif %}</div>
+            {% if c.tip > 0 %}<div style="position:absolut;text-align:right;margin-top:-50px;margin-right:5%">
+            <img src="http://www.jyousoft.com/wp-content/uploads/2016/09/tip.png" width=50px></div>{% endif %}</p>
+        </div>
+        {% endfor %}
+    </div>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+  <script type="text/javascript">
+  function gopay(){
+    var pay_total=document.getElementById("amount").value;
+    if (pay_total <= 0) {
+        alert('支付金额须大于零');
+    } else if (pay_total <= {{ balance }}) {
+        pay_real = 0.01;
+        pay_balance = pay_total - 0.01;
+    } else {
+        pay_real = pay_total - {{ balance }};
+        pay_balance = {{ balance }};
+    }
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i)=="micromessenger") {
+        var param = {memberid: '{{ minfo.memberid }}', openid:'{{ openid }}', pay_real: pay_real,  pay_balance: pay_balance}
+        $.post("../payable/", param, function(result){
+            var payform = eval('('+result+')')
+            //console.log(payform.appId,payform.timeStamp,payform.nonceStr,payform.package,payform.signType,payform.paySign)
+            WeixinJSBridge.invoke('getBrandWCPayRequest',{
+                'appId': payform.appId,
+                'timeStamp': payform.timeStamp,
+                'nonceStr': payform.nonceStr,
+                'package': payform.package,
+                'signType': payform.signType,
+                'paySign': payform.paySign,
+            },
+            function(res) {
+                if(res.err_msg == "get_brand_wcpay_request:ok") {
+                    window.location.href='/jypay/comment?memberid={{ minfo.memberid }}&rawid={{ openid }}';
+                } else {
+                    alert(res.err_msg);
+                }
+            });
+        });
+    } else {
+        var param = {memberid: '{{ minfo.memberid }}', pay_real: pay_real, pay_balance: pay_balance}
+        $.post("../payable/", param, function(result){window.location.href=result})
+    };
+  }
+  </script>
+{% endblock %}

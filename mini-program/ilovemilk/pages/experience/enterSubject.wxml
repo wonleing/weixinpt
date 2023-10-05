@@ -1,0 +1,40 @@
+<view class='topBanner' style='background-image:url({{banner}});background-size:100% 100%;'></view>
+<text class='tname'>{{tname[0]}}\n</text>
+<view class='view' wx:for='{{products}}' wx:if="{{item.fields.type==1}}" wx:key='item'>
+  <view class='viewBanner' bindtap="enterdetail" id="{{item.pk}}">
+    <view class='banner' style='background-image:url({{item.fields.pic}});background-size:100% 100%;'>
+      <view wx:if='{{item.fields.price}}' class='price'>¥{{item.fields.price}}</view>
+    </view>
+    <view class='message'>
+      <view class='tit'>{{item.fields.title}}</view>
+      <view class='count'>{{item.fields.description}}</view>
+      <view class='distance'>{{item.fields.tag}}</view>
+    </view>
+  </view>
+</view>
+<text class='tname'>{{tname[1]}}\n</text>
+<view class='view' wx:for='{{products}}' wx:if="{{item.fields.type==2}}" wx:key='item'>
+  <view class='viewBanner' bindtap="enterdetail" id="{{item.pk}}">
+    <view class='banner' style='background-image:url({{item.fields.pic}});background-size:100% 100%;'>
+      <view wx:if='{{item.fields.price}}' class='price'>¥{{item.fields.price}}</view>
+    </view>
+    <view class='message'>
+      <view class='tit'>{{item.fields.title}}</view>
+      <view class='count'>{{item.fields.description}}</view>
+      <view class='distance'>{{item.fields.tag}}</view>
+    </view>
+  </view>
+</view>
+<text class='tname'>{{tname[2]}}\n</text>
+<view class='view' wx:for='{{products}}' wx:if="{{item.fields.type==3}}" wx:key='item'>
+  <view class='viewBanner' bindtap="enterdetail" id="{{item.pk}}">
+    <view class='banner' style='background-image:url({{item.fields.pic}});background-size:100% 100%;'>
+      <view wx:if='{{item.fields.price}}' class='price'>¥{{item.fields.price}}</view>
+    </view>
+    <view class='message'>
+      <view class='tit'>{{item.fields.title}}</view>
+      <view class='count'>{{item.fields.description}}</view>
+      <view class='distance'>{{item.fields.tag}}</view>
+    </view>
+  </view>
+</view>

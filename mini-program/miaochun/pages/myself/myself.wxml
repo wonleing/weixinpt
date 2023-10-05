@@ -1,0 +1,52 @@
+<!--myself.wxml-->
+<view wx:if='{{authed == 1}}'>
+<view class="container">
+  <view class="userinfo">
+    <block>
+      <view class='userName'>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </view><view class='userName'>
+        <text class="userinfo-balance">余额:{{balance}}</text>
+      </view>
+      <view class='userImage'>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      </view>
+    </block>
+  </view>
+  <view class='orderlist'>
+    <view class='listName' bindtap='myorder'>
+      <view>我的订单</view>
+      <view class='iconfont icon-you'></view>
+    </view>
+    <view class='listName' bindtap='mypay'>
+      <view>我的充值</view>
+      <view class='iconfont icon-you'></view>
+    </view>
+    <view class='listName' bindtap='mypromot'>
+      <view>我的推广</view>
+      <view class='iconfont icon-you'></view>
+    </view>
+    <view class='listName' bindtap='question'>
+       <view>常见问题</view>
+      <view class='iconfont icon-iconset0143'></view>
+    </view>
+    <view class='listName'>
+      <view>
+        <text class='text'>客服服务</text>
+        <button open-type="contact" session-from='weapp'>1111</button>
+      </view>
+      <view class='iconfont icon-xiaoxizhongxin'></view>
+    </view>
+  </view>
+  <button class="button" open-type='share' title='妙纯酸奶优惠充值，充得多送得多！'>
+    分享赚喝奶钱
+  </button>
+  <view class='note-tip'>点击将小程序分享给好友，对方充值或付款，你将得到10%的返现进入你的帐户余额，可直接用于消费</view>
+</view>
+</view>
+<view wx:else>
+  <view>
+    <image src='{{backimg}}' class='backimg' mode='widthFix'></image>
+    <button class='middle' open-type='getUserInfo' bindgetuserinfo='doauth'>授权登录</button>
+  </view>
+</view>

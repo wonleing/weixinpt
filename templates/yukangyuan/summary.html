@@ -1,0 +1,54 @@
+{% extends "yukangyuan/base.html" %}
+{% block pagebody %}
+  <center>
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">订单汇总</h4>
+      <form action="{% url 'yukangyuan_summary' %}" id="stat" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <table class="check_table_1">
+          <tr>
+            <td>开始时间<input type="text" size="8" name="stime" value="20170101"/></td>
+            <td>结束时间<input type="text" size="8" name="etime" value="20171231"/></td>
+            <td><button id="submit" class="_upload_btn">查询</button></td>
+          </tr>
+      </table></form>
+      <table class="list_table" style="text-align:center;">
+      <tr>
+        <th style="text-align:center;">业务员</th>
+        <th style="text-align:center;">描述</th>
+        <th style="text-align:center;">年订单</th>
+        <th style="text-align:center;">年销售</th>
+        <th style="text-align:center;">支持数</th>
+        <th style="text-align:center;">支持金额</th>
+      </tr>
+      {% for s in sinfo %}
+      <tr>
+        <td>{{ s.sname }}</td>
+        <td>{{ s.sdes }}</td>
+        <td>{{ s.onum }}</td>
+        <td>{{ s.ototal }}</td>
+        <td>{{ s.snum }}</td>
+        <td>{{ s.stotal }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">工作报告</h4>
+      <table class="list_table" style="text-align:center;">
+      <tr>
+        <th style="text-align:center;">业务员</th>
+        <th style="text-align:center;width:200px;">报告内容</th>
+        <th style="text-align:center;">日期</th>
+      </tr>
+      {% for r in reports %}
+      <tr>
+        <td>{{ r.sname }}</td>
+        <td style="word-break:break-all;">{{ r.content }}</td>
+        <td>{{ r.date|date:"Y-m-d" }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </center><br/>
+{% endblock %}

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{{ ret.title }}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="telephone=no" name="format-detection" />
+<meta content="false" id="twcClient" name="twcClient" />
+<link href='../../../../static/css/style.css' rel='stylesheet'/>
+        {% if payform %}
+        <script language="javascript">
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                jQuery('a#getBrandWCPayRequest').click(function(e){
+                    WeixinJSBridge.invoke('getBrandWCPayRequest',{
+                        'appId': '{{ payform.appid }}',
+                        'timeStamp': '{{ payform.timestamp }}',
+                        'nonceStr': '{{ payform.noncestr }}',
+                        'package': '{{ payform.package|safe }}',
+                        'signType': '{{ payform.signtype }}',
+                        'paySign': '{{ payform.paysign }}'
+                    },function(res){ if(res.err_msg == "get_brand_wcpay_request:ok") {};location.reload();});
+                });
+                WeixinJSBridge.log('wxjsbridge ready.');
+            }, false)
+            if(jQuery){
+                jQuery(function(){
+                       var width = jQuery('body').width() * 0.87;
+                       jQuery('img').error(function(){
+                                           var self = jQuery(this);
+                                           var org = self.attr('data-original1');
+                                           self.attr("src", org);
+                                           });
+                       jQuery('img').each(function(){
+                                          var self = jQuery(this);
+                                          var w = self.css('width');
+                                          var h = self.css('height');
+                                          w = w.replace('px', '');
+                                          h = h.replace('px', '');
+                                          if(w <= width){return;}
+                                          var new_w = width;
+                                          var new_h = Math.round(h * width / w);
+                                          self.css({'width' : new_w + 'px', 'height' : new_h + 'px'});
+                                          self.parents('div.pic').css({'width' : new_w + 'px', 'height' : new_h + 'px'});
+                                          });
+                       });
+            }
+        </script>
+        {% endif %}
+</head>
+<body>
+    <div class="top_info">
+	<div class="image"> <img src="{{ ret.pic }}"></a> </div>
+	<div class="info">
+	    <h1>{{ ret.title }}</h1>
+		<p> 导演:<span>{{ ret.director }}</span> </p>
+		<p> 主演:<span>{{ ret.actors }}</span> </p>
+		<p> 分类:<span>{{ ret.tag }}</span> </p>
+		<p> 评分:<span>{{ ret.score }}</span> </p>
+		{% if payform %}
+                <p> 全厅包年价格:<span>{{ ret.price }}  <s>{{ ret.origprice }}</s></span> </p>
+                {% else %}
+                <p> 上映时间:<span>{{ ret.suetime }}</span> </p>
+                {% endif %}
+	</div>
+    </div>
+    <div class="area" >
+	<ul class="xzC">
+            <li>
+                {% if payform %}
+                    {% if ispaied %}
+                    <a href="{{ playurl }}0">推送播放</a>
+                    {% else %}
+                    <a id="getBrandWCPayRequest" href="javascript:void(0);">购买</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ playurl }}0">推送播放</a>
+                {% endif %}
+		</li>
+	    </ul>
+    </div>
+    <div class="nav">
+    {% if type == 1 %}
+	<div class="nav_info1">
+    {% else %}
+	<div class="nav_info2">
+    {% endif %}
+                <div class="nav_style series pressed" tag="series" style="display:none;"> 剧集 </div>
+		<div class="nav_style profile" tag="profile"> 简介 </div>
+		<div class="nav_style" tag="recommend"> 相关推荐 </div>
+	</div>
+    </div>
+    <div class="bottom_info">
+            <div class="series info" style="display:none; text-align:center;" align="center">
+                {% for i in number %}<a href="{{ playurl }}{{ forloop.counter0 }}">{{ forloop.counter }}</a>{% endfor %}
+            </div>
+            <div class="comment info" style="display:none; text-align:center;" align="center">
+                {% for key, value in content.items %}
+                <div class="comment_detail">
+                    <p class="title">
+                        {{ key }}
+                    </p>
+                    <p class="content">
+                        {{ value }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="profile info" style="display:none;">
+                <p class="title">
+                    影片简介
+                </p>
+                <p class="content">
+                    {{ ret.description }}
+                </p>
+            </div>
+            <div class="recommend info" style="display:none; text-align:center;" align="center">
+                <div class="movie_obj">
+                    {% for r in recommend %}
+                    <div class="swipe_image">
+                    <a href="?vid={{ r.contentId }}&opid={{ opid }}&wxid={{ wxid }}">
+                    <img src="{{ r.contentPosters }}">
+                    </img></a>
+                    <div class="name">
+                        {{ r.contentName|truncatechars:11 }}
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+</body>
+<script src="../../../../static/js/jquery.js"></script>
+<script type="text/javascript">var type= {{ type }};</script>
+<script src="../../../../static/js/detail_type.js"></script>
+</html>
+

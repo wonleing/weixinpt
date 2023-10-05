@@ -1,0 +1,29 @@
+{% load i18n %}
+<head>
+  <title>妙纯报表系统</title>
+  <link rel="apple-touch-icon" href="{{ STATIC_URL }}pic/index_logo.png"/>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+</head>
+<body>
+  <center>
+  <h4>{{year}}年度销售统计&emsp;<a href="javascript:print1()" rel="external nofollow" target="_self">打印</a><h4>
+  <div id="div1"><table>
+    <tr><th>月份</th><th>总充值数</th><th>总充值额</th><th>京津冀发货</th><th>全国发货</th><th>余额消费</th></tr>
+    {% for s in summary %}
+    <tr><td>{{ forloop.counter }}月</td>
+      <td>{{ s.paynum }}</td>
+      <td>{{ s.paysum }}</td>
+      <td>{{ s.jjj }}</td>
+      <td>{{ s.qg }}</td>
+      <td>{{ s.cost }}</td>
+    {% endfor %}
+  </table></div>
+  <h4>实时数据<h4>
+  <p>京津冀库存量:{{ jjjstorage }}&emsp;全国库存量:{{ qgstorage }}&emsp;总未消费余额:{{ totalbalance }}</p>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script language="javascript"> 
+    function print1() { document.body.innerHTML=document.getElementById('div1').innerHTML;window.print(); }
+  </script>
+  <hr/><div align="center"><font size="2">本平台由<a href="http://www.jyousoft.com">捷优软件</a>提供. Copyright 2013-2019. All rights reserved.</font></div>
+  </center>
+</body>

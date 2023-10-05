@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/start/start",
+    "pages/experience/experience",
+    "pages/experience/activeDetail",
+    "pages/experience/enterSubject",
+    "pages/experience/showAll",
+    "pages/detail/cityDetail",
+    "pages/detail/viewDetail",
+    "pages/payticket/ticketType",
+    "pages/payticket/orderDetail",
+    "pages/payticket/paySuccess",
+    "pages/myself/myself",
+    "pages/myself/myOrder",
+    "pages/myself/orderDetail",
+    "pages/question/question",
+    "pages/collect/collect",
+    "pages/collect/collectproduct"
+  ],
+  "window": {
+    "backgroundTextStyle": "#fff",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#515151",
+    "selectedColor": "#4cc04b",
+    "list": [
+      {
+        "pagePath": "pages/experience/experience",
+        "selectedIconPath": "images/experienceselect.png",
+        "iconPath": "images/experience.png",
+        "text": "推荐"
+      },
+      {
+        "pagePath": "pages/experience/showAll",
+        "selectedIconPath": "images/mapselect.png",
+        "iconPath": "images/map.png",
+        "text": "展商"
+      },
+      {
+        "pagePath": "pages/experience/enterSubject",
+        "selectedIconPath": "images/postcardselect.png",
+        "iconPath": "images/postcard.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/myself/myself",
+        "selectedIconPath": "images/myselfselect.png",
+        "iconPath": "images/myself.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

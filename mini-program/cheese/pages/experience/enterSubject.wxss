@@ -1,0 +1,143 @@
+.tname{
+  color: #040033;
+  font-size: 45rpx;
+  padding-left: 50rpx;
+  margin-top: 50rpx;
+}
+.topBanner{
+  width: 100%;
+  height: 250rpx;
+}
+.content{
+  padding-left: 60.39rpx;
+  padding-right: 60.39rpx;
+  margin-top: 20rpx;
+}
+.introduce{
+  color: #333;
+  font-size: 27.17rpx;
+  line-height: 48.3rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+.view{
+  margin-bottom: 30rpx;
+  padding-left: 60.39rpx;
+  padding-right: 60.39rpx;
+}
+.heart{
+  position: absolute;
+  right: 33.21rpx;
+  top: 33.21rpx;
+  color: #fff;
+  font-size: 48rpx;
+  font-weight: bold;
+  z-index: 10;
+}
+.collect{
+  position: absolute;
+  right: 33.21rpx;
+  top: 33.21rpx;
+  color: red;
+  font-size: 48rpx;
+  font-weight: bold;
+  z-index: 10;
+}
+.view .viewBanner .banner{
+  width: 100%;
+  height: 420rpx;
+  position: relative;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+.view .viewBanner .banner .price{
+  position: absolute;
+  left: 0;
+  bottom: 35.02rpx;
+  width: 181.16rpx;
+  color: #fff;
+  font-size: 36.23rpx;
+  text-align: center;
+  line-height: 88.77rpx;
+  background-color: rgba(0, 0, 0, 0.8)
+}
+.view .viewBanner .message{
+  padding: 27.17rpx;
+  padding-bottom: 15.09rpx;
+  position: relative;
+}
+.view .viewBanner .message .tit{
+  font-size: 35.02rpx;
+  width: 95%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.view .viewBanner .message text{
+  letter-spacing: 3rpx;
+  margin-right: 1rpx;
+}
+.view .viewBanner .message .count{
+  display: flex;
+}
+.view .viewBanner .message .count .star{
+  display: flex;
+}
+.view .viewBanner .message .count .iconfont{
+  color: #ff500b;
+  font-size: 21.7rpx;
+}
+.view .viewBanner .message .count{
+  color: #9c9c9c;
+  font-size: 23rpx;
+  line-height: 48.31rpx;
+}
+.view .viewBanner .message .distance{
+  position: relative;
+  width: 140rpx;
+  color: #eee;
+  font-size: 24.76rpx;
+  letter-spacing: 3rpx;
+  line-height: 54.35rpx;
+  background-color: #4cc04b;
+  border-top-right-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
+  white-space: nowrap;
+  float: left;
+  margin-top: -500rpx;
+  margin-left: -30rpx;
+  vertical-align: sub;
+  text-align: center;
+}
+.view .viewBanner .message .distance .types{
+  position: absolute;
+  left: 0;
+}
+.view .viewBanner .message .distance .type{
+  color: #ff8b2d;
+  font-size: 18.11rpx;
+  border: 1px solid #ff8b2d;
+  border-radius: 10rpx;
+  padding: 4rpx 2rpx;
+}
+.view .viewBanner .message .distance .type:nth-child(2){
+  color: #ff0006;
+  border: 1px solid #ff0006;
+  margin-left: 9.6rpx;
+}
+.view .viewBanner .message .distance .meter{
+  color: #08b096!important;
+}
+.view .viewBanner .message .distance .iconfont{
+  font-size: 27.17rpx;
+} 
+.view .text{
+  color: #333;
+  font-size: 27.17rpx;
+  line-height: 51.33rpx;
+}
+.addrinfo{
+  color: #333;
+  font-size: 27.17rpx;
+  margin-top: 30rpx;
+}

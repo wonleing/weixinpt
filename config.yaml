@@ -1,0 +1,12 @@
+---
+name: weixinpt
+version: 3
+libraries:
+- name: lxml
+  version: "2.3.4"
+- name: "django"
+  version: "1.5"
+- name: "PyCrypto"
+  version: "2.6"
+- url: /favicon.ico
+  static_path: favicon.ico

@@ -1,0 +1,159 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link title="style1" rel="stylesheet" href="{{ STATIC_URL }}css/baoming.css" type="text/css" />
+</head>
+<body>
+  <div class="form_content">
+    <img src="http://www.nongxinyin.com/nxy/resource/cms/2015/03/2015032410482772756.jpg" class='banner' />
+    <h4>{{pxname}}</h4>
+    <p><b>培训时间：</b>{{pxtime}}</p>
+    <p><b>人数上限：</b>{{upto}}</p>
+    <p><b>截止时间：</b>{{endtime}}</p>
+    <p><b>培训简介：</b>{{description|safe}}</p>
+    <p><b>温馨提示：</b>{{tip|safe}}</p>
+    <p><b>日程安排：</b><a href='{{link}}'>点击查看</a></p>
+    <form action="{% url 'nongxin_add' %}" method="post">
+    <fieldset>
+        <legend>必填项</legend>
+        <div class="form-row">
+            <div class="field-label"><label>单位:</label></div>
+            <div class="field-widget">
+                <select name="company" class="validate-selection">
+                    <option>请选择</option>
+                    <option>北京农商银行</option>
+                    <option>天津农商银行</option>
+                    <option>河北联社</option>
+                    <option>山西联社</option>
+                    <option>内蒙古联社</option>
+                    <option>辽宁联社</option>
+                    <option>吉林联社</option>
+                    <option>黑龙江联社</option>
+                    <option>上海农商银行</option>
+                    <option>江苏联社</option>
+                    <option>浙江联社</option>
+                    <option>安徽联社</option>
+                    <option>福建联社</option>
+                    <option>江西联社</option>
+                    <option>山东联社</option>
+                    <option>河南联社</option>
+                    <option>湖北联社</option>
+                    <option>湖南联社</option>
+                    <option>广东联社</option>
+                    <option>广西联社</option>
+                    <option>海南联社</option>
+                    <option>重庆农商行</option>
+                    <option>四川联社</option>
+                    <option>贵州联社</option>
+                    <option>云南联社</option>
+                    <option>陕西联社</option>
+                    <option>甘肃联社</option>
+                    <option>青海联社</option>
+                    <option>宁夏黄河农商行</option>
+                    <option>新疆联社</option>
+                    <option>深圳农商行</option>
+                    <option>天津滨海农商行</option>
+                    <option>武汉农商行</option>
+                    <option>成都农商行</option>
+                    <option>大连农商行</option>
+                    <option>杭州联合村镇银行</option>
+                    <option>鄞州农商行</option>
+                    <option>苏州银行</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>其它单位(选项中没有时请填写):</label></div>
+            <div class="field-widget"><input name="othercompany" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>姓名:</label></div>
+            <div class="field-widget"><input name="name" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>性别:</label></div>
+            <div class="field-widget">
+                <select name="gender" class="validate-selection">
+                    <option>请选择</option>
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>民族:</label></div>
+            <div class="field-widget"><input name="race" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>部门/机构:</label></div>
+            <div class="field-widget"><input name="department" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>职务:</label></div>
+            <div class="field-widget"><input name="position" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>移动电话:</label></div>
+            <div class="field-widget"><input name="phone" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>指定联系人(仅集中报名时填写):</label></div>
+            <div class="field-widget"><input name="contact" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>单住/合住:</label></div>
+            <div class="field-widget">
+                <select name="hotel" class="validate-selection">
+                    <option>请选择</option>
+                    <option>单住</option>
+                    <option>合住</option>
+                </select>
+            </div>
+        </div>
+    </fieldset><br>
+    <fieldset>
+        <legend>可更新项</legend>
+        <p>信息提交后，可根据单位及姓名更新抵达信息，单位及姓名必须要与第一次提交内容一致</p>
+        <div class="form-row">
+            <div class="field-label"><label>到达方式:</label></div>
+            <div class="field-widget">
+                <select name="arrival" class="validate-selection">
+                    <option>请选择</option>
+                    <option>自行前往</option>
+                    <option>需要接站</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>航班/车次:</label></div>
+            <div class="field-widget"><input name="anumber" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>到达日期(例如20190408):</label></div>
+            <div class="field-widget"><input name="adate" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>到达时间(例如12:08):</label></div>
+            <div class="field-widget"><input name="atime" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>到达站名:</label></div>
+            <div class="field-widget"><input name="astation" class="required" /></div>
+        </div>
+        <div class="form-row">
+            <div class="field-label"><label>备注:</label></div>
+            <div class="field-widget"><input name="comment" class="required" /></div>
+        </div>
+    </fieldset>
+    <input name="pxid" hidden="hidden" value="{{pxid}}" />
+    <input name="pxname" hidden="hidden" value="{{pxname}}" />
+    <input type="submit" class="submit" value="提交后填写同行人员信息" />
+    <p>(报名信息必须填写完整)</p>
+    </form>
+  </div>
+</body>
+</html>

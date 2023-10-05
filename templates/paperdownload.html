@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="expires" content="0">
+<title>壁纸下载</title>
+<head>
+<body>
+<style>
+body {
+    background-image:url(http://123.206.26.34/html/bg.jpg);
+}
+
+.swipe_image {
+    float: left;
+    width: 80px;
+    height: 140px;
+    margin-top: 15px;
+    margin-left: 15px;
+    background-color: rgba(255,255,255,01);
+    box-shadow: 5px 5px 3px #888888
+}
+
+.swipe_image .bizhi{
+  width:100%;
+  height:100px;
+}
+.swipe_image .name{
+  height:20px;
+  margin-top: 10px;
+  width:100%;
+  text-align:center;
+  font-size:13px;
+  
+}
+.heart{
+  height: 20px;
+  width: 20px;
+}
+a{
+  font-size: 9px;
+  color:rgba(255,254,254,0.2) 
+}
+a:link { 
+  text-decoration: none;
+  color: rgba(78,77,77,0.5);
+}
+a:hover { 
+  text-decoration:underline;
+  box-shadow:2px 2px 1px #888888 ;
+  color: black;
+}
+a:visited{ 
+  text-decoration: none;
+  color: rgba(78,77,77,1)
+}
+</style>
+<script language="javascript">
+var colors=new Array("red","orange","green","blue","browm","purple","gray");
+var ind=0;
+function changecolor()
+{
+        document.getElementById("myHeader").style.color=colors[ind++];
+        if (ind==(colors.length)){ind=0}
+}
+setInterval("changecolor()",1000);
+window.onload=changecolor;
+</script>
+{% if title %}
+<h4 align="right" id="myHeader">{{ title }}</h4>
+{% endif %}
+<hr>
+{% for p in papers %}
+<div class="swipe_image">
+   <a href="{{ baseurl }}/download?id={{ p.id }}">
+   <img class="bizhi" src="{{ p.pic }}" alt="{{ p.title }}" />
+   <div class="name">
+      <img class="heart" src="http://123.206.26.34/html/ol/heart.png" /> {{ p.price }}
+   </div></a>
+</div>
+{% endfor %}
+</div>
+</body>
+</html>

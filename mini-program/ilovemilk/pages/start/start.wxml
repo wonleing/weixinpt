@@ -1,0 +1,10 @@
+<view class="containers">
+  <image animation="{{animationData}}" class='banner' src='{{bootimg}}' style='left: {{leftValue}}rpx;' />
+  <!--<view class='titleIcon'>
+    <image mode='widthFix' src=''></image>
+  </view>-->
+  <view class="start" bindtap='startProject'>开启探索之旅</view>
+    <!--<view class="typeIcon">
+      <image mode='widthFix' src=''></image>
+    </view>-->
+</view>

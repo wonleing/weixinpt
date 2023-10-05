@@ -1,0 +1,32 @@
+{% load i18n %}
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+</head>
+<body>
+    <img src="http://www.mygymchina.com/upload/201402/1392285024.png" width="320px" />
+    {% if login_user %}
+      <div style="float:right;"><b>当前用户: {{ login_user }}</b> | <a href="{% url 'mygym_logout' %}"><b>登出</b></a></div>
+      <div align="center">
+      <h4>会员信息录入</h4>
+      <form action="{% url 'mygym_doinput' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <label>学号:&emsp;&emsp;</label><input type="text" name="cid" /></br>
+        <label>姓名:&emsp;&emsp;</label><input type="text" name="name" /></br>
+        <label>电话:&emsp;&emsp;</label><input type="text" name="phone" /></br>
+        <label>中心编号:&emsp;</label><input type="text" name="sid" /></br>
+        <p><input type="submit" value="保存" /></p>
+      </form>
+      </div>
+    {% else %}
+      <div align="center">
+      <h4>用户登录</h4>
+      <form action="{% url 'mygym_dologin' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <label>用户名:&emsp;</label><input type="text" name="account" /></br>
+        <label>密码:&emsp;&emsp;</label><input type="password" name="password" /></br>
+        <p><input type="submit" value="登录" /></p>
+      </form>
+      </div>
+    {% endif %}
+    <br/><hr/>
+    <div align="center"><font size="2">本平台由<a href="http://www.jyousoft.com">捷优软件</a>提供. Copyright 2013-2014. All rights reserved.</font></div>
+</body>

@@ -1,0 +1,150 @@
+{% extends "jypay/base.html" %}
+{% block pagebody %}
+  <title>渠道中心</title>
+</head>
+<body class="_checkDetail_page">
+  <center>
+    <div class="_checkDetail_1">
+      <form action="{% url 'jypay_updateuser' %}" id="binfoForm" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <div class="media-drop2">
+          <img src="{{ cinfo.logo }}" id="userlogo" width="62px" height="62px" style="position:absolute;z-index:2;top:6px;left:50%;margin-left:-31px;border-radius:31px;">
+      </div>
+      <h4 style="margin:40px 0 auto 0;font-size:1.6rem;">渠道详情</h4>
+      <table class="check_table_1">
+        <tr>
+          <td style="vertical-align:top;min-width:52px;">渠道主图</td>
+          <td>
+            <div class="media-drop1">
+              <div id="droppedimage1"><img id="bigbanner" src="{{ minfo.pic }}" width="86%"/></div>
+              <div id="dropbox1" class="media-drop-placeholder">
+                <input id="realUploadBtn1" name="media-drop-placeholder-file" type="file" accept="image/*" tabindex="-1"/>
+              </div>
+              <input type="hidden" id="fname1" value="_member_{{ minfo.memberid }}" />
+              <input type="hidden" name="pic" id="filename1" value="{{ minfo.pic }}" />
+              <button id="resetupload1" class="_upload_btn">重新上传</button>
+            </div>
+          </td>
+        </tr>
+        <tr style="height:30px;">
+          <td>渠道名称</td>
+          <td><input type="text" name="name" value="{{ minfo.name }}" style="width:86%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+          <td>特色/地址</td>
+          <td><input type="text" name="address" value="{{ minfo.address }}" style="width:86%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+          <td>详情描述</td>
+          <td><input type="text" name="description" value="{{ minfo.description }}" style="width:86%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+          <td>登录密码</td>
+          <td><input type="text" name="password" value="{{ minfo.password }}" style="width:86%;" /></td>
+        </tr>
+        <tr style="height:30px;">
+          <td>联系电话</td>
+          <td><input type="text" name="phone" value="{{ minfo.phone }}" style="width:86%;" /></td>
+        </tr>
+        <tr style="height:50px;">
+          <input type="hidden" name="memberid" value="{{ minfo.memberid }}" />
+          <td colspan="2"><button type="submit" class="_check_btn">修改信息</button></td>
+        </tr>
+      </table>
+      <table class="_checkDetail_2">
+        <tr style="height:22px;">
+          <td style="width:55px;">唯一标识</td>
+          <td style="width:110px;word-break:break-all;">{{ minfo.memberid }}</td>
+          <td style="width:55px;">所属分类</td>
+          <td style="word-break:break-all;">{{ minfo.type }}</td>
+        </tr>
+        <tr style="height:22px;">
+          <td>未结余额</td>
+          <td>{{ minfo.balance }}</td>
+          <td>累计收入</td>
+          <td>{{ minfo.total }}</td>
+        </tr>
+        <tr style="height:22px;">
+          <td>开户日期</td>
+          <td>{{ minfo.jointime }}</td>
+          <td>优惠满减</td>
+          <td>{% if cinfo.man == 0 %}无{% else %}满{{ cinfo.man }}减{{ cinfo.jian }}{% endif %}</td>
+        </tr>
+        <tr style="height:22px;">
+          <td>评论打赏</td>
+          <td><a href="../../tip/">点击进入</a></td>
+          <td>二维码页</td>
+          <td><a href="../../qrcode/?memberid={{ minfo.memberid }}">点击生成</a></td>
+        </tr>
+        <tr style="height:12px;">
+          <td colspan="4">&nbsp;</td>
+        </tr>
+        <tr style="height:26px;">
+          <td colspan="4" class="_accountinfo">结款帐号：{{ minfo.accountinfo }}</td>
+        </tr>
+      </table></form>
+    </div><br/>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">最近结账(30笔)</h4>
+      <table class="list_table" style="text-align:center;">
+      <tr>
+        <th style="text-align:center;width:70px;word-break:break-all;">账户</th>
+        <th style="text-align:center;">金额</th>
+        <th style="text-align:center;width:90px;word-break:break-all;">到账账号</th>
+        <th style="text-align:center;">日期</th>
+        <th style="text-align:center;width:30px;">状态</th>
+      </tr>
+      {% for o in outlist %}
+      <tr>
+        <td>{{ o.memberid }}</td>
+        <td>{{ o.amount }}</td>
+        <td><p style="word-break:break-all;">{{ o.accountinfo }}</p></td>
+        <td>{{ o.date|date:"Y-m-d H:i:s" }}</td>
+        <td>{% if o.status == 0 %}结算中{% else %}已完成{% endif %}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+
+    <div style="margin-top:20px;">
+      <h4 style="margin:0 0 5px 0;">最近交易(1000笔)</h4>
+      <table class="list_table">
+      <tr>
+        <th style="text-align:center;width:80px;">订单号</th>
+        <th style="text-align:center;">用户</th>
+        <th style="text-align:center;">方式</th>
+        <th style="text-align:center;">金额</th>
+        <th style="text-align:center;">日期</th>
+        <th style="text-align:center;">状态</th>
+      </tr>
+      {% for i in inlist %}
+      <tr>
+        <td><p style="word-break:break-all;">{{ i.orderid }}</p></td>
+        <td>{{ i.userid }}</td>
+        <td>{% if i.type == 'wx_pub' %}微信{% elif i.type == 'alipay_wap' %}支付宝{% else %}其它{% endif %}</td>
+        <td>{{ i.amount }}</td>
+        <td>{{ i.date|date:"Y-m-d H:i:s" }}</td>
+        <td>{% if i.status == 0 %}已退款{% elif i.status == 1 %}已到帐{% elif i.status == 2 %}未付款{% endif %}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </center><br/>
+  <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.html5uploader-1.1.js"></script>
+  <script src="{{ STATIC_URL }}js/exif.js"></script>
+  <script src="{{ STATIC_URL }}js/uploadimg2.js"></script>
+  <script>
+  $(document).ready(function () {
+    var form = $('#binfoForm');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+      return false;
+     });
+  });
+  </script>
+{% endblock %}

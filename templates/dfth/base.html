@@ -1,0 +1,56 @@
+{% load i18n %}
+<head>
+    <title>东方天合办公系统</title>
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}pic/index_logo.png"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" />
+</head>
+<body>
+  <center>
+  <img src="http://img.360500.com/2007/818/4987/toplogo.jpg" width="100%" /></br>
+  {% if login_user %}
+    <div style="float:left;"><a href="/dfth">首页</a></div>
+    <div style="float:right;"><b>当前用户: <a style="text-decoration:underline;color:#00A0E9;" onclick="changepwd();">{{ login_user.employeename }}</a></b> | <a href="{% url 'dfth_logout' %}"><b>登出</b></a></br>
+    </div></br>
+    {% block pagebody %}
+    {% endblock %}
+  <div id="cover" style="display:none;position:absolute;z-index:3;width:300px;height:200px;position:absolute;left:40%;top:40%;background-color:gray;">
+    <form id="changepwd" action="{% url 'dfth_changepwd' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <input type="hidden" name="uid" value="{{ login_user }}"/>
+      <h4>修改密码</h4>
+      <h4>新的密码<input type="text" name="newpwd" style="display:inline;text-align:center;" size="15"/></h4>
+      <h4>再次确认<input type="text" name="againpwd" style="display:inline;text-align:center;" size="15"/></h4>
+      <p><font color="white" onclick="closewindow();">关闭窗口</font>&emsp;<button id="submit">确认修改</button></p>
+    </form>
+  </div>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script>
+  function changepwd(){
+    document.getElementById("cover").style.display="block";
+  }
+  function closewindow(){
+    document.getElementById("cover").style.display="none";
+    return false;
+  }
+  $(document).ready(function () {
+    var form = $('#changepwd');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+        document.getElementById("cover").style.display="none";
+        return false;
+     });
+  });
+  </script>
+  {% else %}
+      <form action="{% url 'dfth_dologin' %}" method="post" enctype="multipart/form-data">{% csrf_token %}</br>
+        员工名:<input type="text" name="account" />
+        密  码:<input type="password" name="password" />
+        <input type="submit" value="登录" />
+      </form>
+  {% endif %}
+  <hr/><div align="center"><font size="2">本平台由<a href="http://www.jyousoft.com">捷优软件</a>提供. Copyright 2013-2017. All rights reserved.</font></div>
+  </center>
+</body>

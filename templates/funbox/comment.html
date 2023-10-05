@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jy.css" />
+<title>点评一下</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+ul,li{list-style:none;}
+.star {position:relative;width:260px;height:24px; margin:0 auto 0;}
+.star ul{margin:0 10px;}
+.star li{float:left;width:24px;height:22px;text-indent:-9999px;background:url('{{ STATIC_URL }}pic/star_2.png') no-repeat;cursor:pointer;}
+.star li.on{float:left;width:24px;height:22px;text-indent:-9999px;background:url('{{ STATIC_URL }}pic/star_1.png') no-repeat;cursor:pointer;}
+.star p {padding:10px 10px 0;position:absolute;top:20px;width:159px;height:60px;z-index:100;}
+.star p em {color: #FF6600;display: block;font-style: normal;}
+.star strong {color:#ff6600;padding-left:10px;}
+.hidden{display:none;}
+</style>  
+</head>
+<body class="_comment_page_2">
+  <form action="{% url 'funbox_docomment' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <input type="hidden" name="memberid" value="{{ memberid }}" />
+    <input id="status" type="hidden" name="status" value="" />
+    <p class="_item_1"><span>总体</span></p>
+    <p><div class="star"><ul><li><a href="javascript:;">1</a></li><li><a href="javascript:;">2</a></li><li><a href="javascript:;">3</a></li><li><a href="javascript:;">4</a></li><li><a href="javascript:;">5</a></li></ul></div></p>
+    <p class="_item_1"><span style="vertical-align:top">点评</span>&emsp;<textarea class="_comment_area" rows="5" cols="30" name="content"></textarea></p>
+    {% if userid %}
+    <input type="hidden" name="userid" value="{{ userid }}" />
+    {% else %}
+    <p class="_item_1"><span>电话</span>&emsp;<input type="text" name="phone" size="11" style="font-size:100%" class="input_phone"/></p>
+    {% endif %}
+    <center><button type="submit" style="height:32px;width:112px;background:url({{ STATIC_URL }}pic/btn_1.png) no-repeat;border:0;" value=""><span style="color:white;font-size:12px;font-weight:bold;">提交评论</span></button></center>
+  </form>
+  <h5 style="color:#BDBDBD;font-size:12px;margin:33px 40px;">优秀点评有机会获得商家的打赏哦！</h5>
+  <div align="center" style="color:#B4B4B5;font-size:12px;margin-top:25px;">本平台由<a style="color:#00A0E9" href="http://www.jyousoft.com">捷优软件</a>提供. <br/>Copyright 2013-2017. All rights reserved.</div>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/score.js"></script>
+  <script type="text/javascript">  
+  $(function(){  
+    var score = new Score({  
+      callback: function(cfg) {  
+        console.log(cfg.starAmount);  
+      }  
+    });  
+  });  
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+.containers{
+  width: 100%;
+  overflow-y: scroll;
+}
+.banner{
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.banner .bj{
+  width: 100%;
+}
+.banner .erCode{
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  bottom: 30rpx;
+}
+.content{
+  width: 100%;
+  height: auto;
+  margin-left:auto;
+  margin-top: auto;
+}
+.content image{
+  width: 100%;
+}

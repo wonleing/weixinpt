@@ -1,0 +1,57 @@
+/* postcard.wxss */
+ .containers{
+  width: auto;
+  height: 100%;
+  padding-left: 80.92rpx;
+  padding-right: 80.92rpx;
+  padding-bottom: 30.92rpx;
+  position: relative;
+}
+.backHome{
+  width: 140rpx;
+  line-height: 90rpx;
+  position: absolute;
+  right: -50rpx;
+  bottom: 300rpx;
+  color: #fff;
+  font-size: 74rpx;
+  border-top-left-radius: 50rpx;
+  border-bottom-left-radius: 50rpx;
+  background-color: #4cc04b;
+  padding-left: 20rpx;
+}
+.postcard{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.postcard image{
+  border: 4rpx solid #4cc04b;
+}
+.share{
+  display: flex;
+  margin-top: 30rpx;
+}
+.share button{
+  flex: 1;
+  font-size: 34rpx;
+  text-align: center;
+  line-height: 86.35rpx;
+  box-shadow: 0 15rpx 20rpx #ace0af;
+  border-radius: 45rpx;
+  letter-spacing: 2rpx;
+}
+.share .share1{
+  color: #fff;
+  background-color: #4cc04b;
+  margin-right: 31.4rpx;
+}
+.share .share2{
+  color: #4cc04b;
+  background-color: #fff;
+  border:1px solid #4cc04b;
+}
+.share .share2::after{
+  border: none;
+}  

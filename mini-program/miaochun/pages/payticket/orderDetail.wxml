@@ -1,0 +1,9 @@
+<form bindsubmit='dopay'>
+  <radio-group class='radio-group' name="amount">
+    <lable class='radio' wx:for="{{discount}}" wx:key='item'>
+      <radio value="{{item.a}}" checked/>充{{item.a}}得{{item.b}}
+    </lable>
+  </radio-group>
+  <view class='text'>充值其它金额<input class="ie" name="otheramount"></input></view>
+  <button class='button' form-type='submit'>微信支付</button>
+</form>

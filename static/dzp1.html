@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="width=360,minimum-scale=1.0" name="viewport">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="telephone=no" name="format-detection" />
+<title>幸运大转盘</title>
+<style type="text/css">
+<!--
+body {
+ background-image: url(pic/bg.jpg);
+}
+-->
+.demo{width:360px; position:relative; margin: auto}
+#disk{width:360px; }
+#start{width:50px; position:absolute; top:80px; left:115px;}
+#start img{cursor:pointer}
+.boxcontent {
+	margin:1px 15px 15px 15px;
+	border-radius: 5px;
+	padding: 2px;
+	background-color: #FEF8B2;
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+.boxyellow{
+	background-color: #FEF8B2;
+}
+.box {
+	border-radius: 5px;
+	font-size:14px;
+	border: 1px dashed rgba(0, 0, 0, 0.3);
+}
+.box .title-green {
+	padding: 0 5px 0px 10px;
+	background:url(http://www.wxapi.cn/index/images/activity/title-bg-green.png) no-repeat 0 0;
+	border-radius: 3px 3px 3px 0;
+	color:#ffffff;
+	height:22px;
+	margin:-1px;
+	/*-moz-text-shadow:0 1px 0 #8d0001;-webkit-text-shadow:0 1px 0 #8d0001;text-shadow:0 1px 0 #8d0001;
+	text-shadow:0px 1px 0 #8d0001;*/
+}
+.box .Detail {
+	padding: 15px;
+}
+            .main .bottom {
+                height: 130px;
+                margin: 20px;
+                margin-top: 20px;
+            }
+
+            .main .bottom .title {
+                color: yellow;
+            }
+
+            .main .bottom .content {
+                color: white;
+                font-size: 15px;
+            }
+
+</style>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script type="text/javascript">
+$(function(){
+ $("#startbtn").rotate({
+  bind:{
+   click:function(){
+    var a = Math.floor(Math.random() * (35-1)+1);
+     $(this).rotate({
+       duration:3000,
+       angle: 0, 
+       animateTo:1440+a,
+       easing: $.easing.easeOutSine,
+       callback: function(){
+           alert('有钱能使磨推鬼，唯一大奖你也能中，你真是不折不扣的土豪型女汉子！');
+       }
+     });
+   }
+  }
+ });
+});
+</script>
+</head>
+<body>
+<div id="main">
+   <div class="demo">
+      <div id="disk"><img src="pic/disk.png"></div>
+      <div id="start"><img src="pic/start.png" id="startbtn"></div>
+   </div>
+   <div class="boxcontent boxyellow">
+   <div class="box">
+   <div class="title-green">活动说明：</div>
+   <div class="Detail">
+     <p>1. 本次活动每人每天只能转1次,重复点击无意义</p>
+     <p>2. 中奖者请务必在微信中输入"姓名,手机号"(注意中间用逗号隔开)，以便兑奖时核对</p>
+     <p>3. 此页面不作为中奖凭证，中奖以我们后台记录为准。</p>
+   </div>
+   </div>
+   </div>
+<input type=button value='分享到朋友圈' onclick="javascript:share();">
+</div>
+</body>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+function share(){
+  wx.onMenuShareTimeline({
+    title: '玩游戏，赢取华为百万心礼', // 分享标题
+    link: 'http://dance.158.cn/dance/', // 分享链接
+    imgUrl: 'http://ww3.sinaimg.cn/small/558fe6e3tw1ens1pyruk0j203k03kmx3.jpg', // 分享图标
+    success: function () { 
+        // 用户确认分享后执行的回调函数
+    },
+    cancel: function () { 
+        // 用户取消分享后执行的回调函数
+    }
+  });
+}
+
+wx.config({
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端>时才会打印。
+    appId: 'wxde101a87cf4530ba', // 必填，公众号的唯一标识
+    timestamp: '1421746106', // 必填，生成签名的时间戳
+    nonceStr: '3PVp6hEZJuC7VTz', // 必填，生成签名的随机串
+    signature: 'fc4cbc7c952cefeb80054377da45b15cd4d29892',// 必填，签名，见附录1
+    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+});
+wx.ready(function () {
+// 在这里调用 API
+wx.onMenuShareTimeline({
+    title: '玩游戏，赢取华为百万心礼', // 分享标题
+    link: 'http://dance.158.cn/dance/', // 分享链接
+    imgUrl: 'http://ww3.sinaimg.cn/small/558fe6e3tw1ens1pyruk0j203k03kmx3.jpg', // 分享图标
+    success: function () { 
+        // 用户确认分享后执行的回调函数
+    },
+    cancel: function () { 
+        // 用户取消分享后执行的回调函数
+    }
+});
+wx.onMenuShareAppMessage({
+    title: '玩游戏，赢取华为百万心礼', // 分享标题
+    desc: '我办了网友，快来跟我PK，华为Mate7拿回家！', // 分享描述
+    link: 'http://dance.158.cn/dance/', // 分享链接
+    imgUrl: 'http://ww3.sinaimg.cn/small/558fe6e3tw1ens1pyruk0j203k03kmx3.jpg', // 分享图标
+    type: 'link', // 分享类型,music、video或link，不填默认为link
+    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    success: function () { 
+        // 用户确认分享后执行的回调函数
+    },
+    cancel: function () { 
+        // 用户取消分享后执行的回调函数
+    }
+});
+});
+</script>
+</html>

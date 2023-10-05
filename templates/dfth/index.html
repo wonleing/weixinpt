@@ -1,0 +1,71 @@
+{% extends "dfth/base.html" %}
+{% block pagebody %}
+<div class="menu">
+  <dt><a href="produce/">生产模块</a></dt>
+  <dt><a href="sale/">销售模块</a></dt>
+  <dt><a href="finance/">财务模块</a></dt>
+  <dt><a href="purchase/">采购模块</a></dt>
+</div>
+<div class="content">
+  {% for n in notice %}
+    <h4><font color="red"><b>{{ n.text }}</b></font></h4>
+  {% endfor %}
+  <h4>报销记录</h4>
+  <table>
+    <tr><th>流水号</th><th>类型</th><th>备注</th><th>金额</th><th>更新日期</th><th>审批状态</th></tr>
+    {% for e in expense %}
+    <tr><td>{{ e.id }}</td>
+      <td>{% if e.type == 'gz' %}工资{% elif e.type == 'clf' %}差旅费{% elif e.type == 'kq' %}客情{% elif e.type == 'scxg' %}生产相关{% elif e.type == 'bgfy' %}办公费用{% elif e.type == 'cf' %}餐费{% elif e.type == 'ygcf' %}员工餐费{% elif e.type == 'fz' %}房租{% elif e.type == 'ygflf' %}员工福利费{% elif e.type == 'ygpxf' %}员工培训费{% elif e.type == 'yf' %}运费{% elif e.type == 'ggxcf' %}广告宣传费{% elif e.type == 'jtf' %}交通费{% elif e.type == 'yjf' %}邮寄费{% elif e.type == 'fwf' %}服务费{% elif e.type == 'sdf' %}水电费{% elif e.type == 'gdfh' %}股东分红{% elif e.type == 'ryf' %}燃油费{% elif e.type == 'tcf' %}停车费{% elif e.type == 'qcxlf' %}汽车修理费{% elif e.type == 'qcbxf' %}汽车保险费{% elif e.type == 'nzjj' %}年终奖金{% elif e.type == 'dfylk' %}垫付原料款{% else %}其它支出{% endif %}</td>
+      <td>{{ e.reason }}</td>
+      <td>{{ e.number }}</td>
+      <td>{{ e.date|date:"Ymd" }}</td>
+      <td>{% if e.status == 1 %}已审核{% elif e.status == 2 %}已驳回{% elif e.status == 3 %}已打款{% else %}未审核{% endif %}</td>
+    {% endfor %}
+  </table>
+  <form action="{% url 'dfth_addexpense' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <fieldset class="add_fieldset">
+      <legend><h4>报销申请</h4></legend>
+      <table class="add_table" cellspacing="1" border="1">
+        <tr>
+          <td><label>报销类型:</label></td>
+          <td><select class="order_select" name="type">
+                <option value ="" selected="selected"></option>
+                <option value ="clf">差旅费</option>
+                <option value ="kq">客情</option>
+                <option value ="scxg">生产相关</option>
+                <option value ="bgfy">办公费用</option>
+                <option value ="cf">餐费</option>
+                <option value ="ygpxf">员工培训费</option>
+                <option value ="fz">房租</option>
+                <option value ="yf">运费</option>
+                <option value ="ggxcf">广告宣传费</option>
+                <option value ="jtf">交通费</option>
+                <option value ="yjf">邮寄费</option>
+                <option value ="fwf">服务费</option>
+                <option value ="sdf">水电费</option>
+                <option value ="ryf">燃油费</option>
+                <option value ="tcf">停车费</option>
+                <option value ="qcxlf">汽车修理费</option>
+                <option value ="qcbxf">汽车保险费</option>
+                <option value ="dfylk">垫付原料款</option>
+              </select></td>
+        </tr>
+        <tr>
+          <td><label>原由备注:</label></td>
+          <td><input type="text" name="reason1" /></td>
+        </tr>
+        <tr>
+          <td><label>收款人:</label></td>
+          <td><input type="text" name="reason2" /></td>
+        </tr>
+        <tr>
+          <td><label>金额:</label></td>
+          <td><input type="text" name="number" /></td>
+        </tr>
+      </table>
+      <input type="hidden" name="username" value="{{ login_user.employeename }}"/>
+      <p class="bton"><input type="submit" value="保存" /></p>
+    </fieldset>
+  </form></br>
+</div>
+{% endblock %}

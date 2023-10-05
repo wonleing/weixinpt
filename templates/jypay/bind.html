@@ -1,0 +1,54 @@
+{% extends "jypay/base.html" %}
+{% block pagebody %}
+  <title>商家微信绑定</title>
+</head>
+<body class="_register_page">
+  <div align="center">
+    <h1 class="_title">商家微信绑定</h1>
+      <form id="regForm" action="{% url 'jypay_dobind' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <table class="_rg_border_1">
+          <tr>
+            <td colspan="2" height="20px"></td>
+            <input type="hidden" name="centerid" value="{{ centerid }}" />
+            <input type="hidden" name="openid" value="{{ openid }}" />
+          </tr>
+          <tr height="30px">
+            <td width="72px" style="text-align:center;">&nbsp;渠道代号</td>
+            <td><input type="text" name="memberid" style="width:90%"/></td>
+          </tr>
+          <tr height="30px">
+            <td width="72px" style="text-align:center;">&nbsp;登录密码</td>
+            <td><input type="text" name="password" style="width:90%"/></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">&nbsp;身份类别</td>
+            <td>
+              <select name="type" style="width:90%;height:25px;">
+                <option value="0">收款渠道</option>
+                <option value="1">商户中心</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" height="20px"></td>
+          </tr>
+        </table>
+        <center><button id="submit" class="_upload_btn">绑定</button></center>
+        </form><br/>
+      <p>商户中心绑定时无需填写渠道代号，填写密码并选择商户中心类型即可</p><br/>
+    </div>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script>
+  $(document).ready(function () {
+    var form = $('#regForm');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+        return false;
+     });
+  });
+  </script>
+{% endblock %}

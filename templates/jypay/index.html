@@ -1,0 +1,32 @@
+{% extends "jypay/base.html" %}
+{% block pagebody %}
+    <title>收款渠道列表</title>
+  </head>
+  <body class="_list_page">
+    <center>
+    <div class="category" id="category">
+      <li></li>
+      <li style="left:25%"><a href="?type=all">全部</a></li>
+      <li style="left:35%"><a href="?type=1">{{ cinfo.0 }}</a></li>
+      <li style="left:45%"><a href="?type=2">{{ cinfo.1 }}</a></li>
+      <li style="left:55%"><a href="?type=3">{{ cinfo.2 }}</a></li>
+      <li style="left:65%"><a href="?type=4">{{ cinfo.3 }}</a></li>
+      <li style="left:75%"><a href="?type=5">{{ cinfo.4 }}</a></li>
+      <li style="left:85%"><a href="?type=6">{{ cinfo.5 }}</a></li>
+    </div>
+    <div class="listData" id="wrapper"><div id="scroller">
+      {% for m in memberlist %}
+      <div class="_list" onclick="document.location='{{ baseurl }}{{ m.memberid }}';">
+        <div class="_imgDiv">
+          <img src="{{ m.pic }}" width="120px" style="vertical-align:middle;"/>
+        </div>
+        <div class="_textDiv">
+          <h4>{{ m.name }}</h4>
+          <span style="font-size:12px;color:#595757;">{{ m.address }}
+          {% if cinfo.6 > 0 and cinfo.7 > 0 %}<br/>满{{ cinfo.6 }}<font color='red'>返</font>{{ cinfo.7 }}{% endif %}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div></div>
+    </center><br/>
+{% endblock %}

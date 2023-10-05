@@ -1,0 +1,36 @@
+<!--pages/experience/cityDetail.wxml-->
+<view wx:if="{{productinfo.fields.onsale == 1}}">
+<form bindsubmit='dopay' class='section'>
+  <view class='title'>
+    {{productinfo.fields.title}}
+  </view>
+  <view wx:if="{{videoURL}}" class='movieBox'>
+    <video id='myVideo' class='movie' src='{{videoURL}}' autoplay='true' objectFit='cover' show-fullsceen-btn='false' loop='true' page-gesture='true' direction='vertical'></video>
+  </view>
+  <view wx:else class='swiper-container'>
+    <swiper class='swiper-wrapper' indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for='{{slidelist}}' wx:key='item'>
+        <swiper-item>
+          <image src="{{item}}" class="banner" mode='aspectFill'/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class='content'>
+    <view wx:if='{{productinfo.fields.price}}' class='price'>¥{{productinfo.fields.price}}元</view>
+    <view class='{{isCollect=="True"?"heartSelected iconfont icon-xin":"heart iconfont icon-xin-xian"}} ' bindtap='optCollect'></view>
+    <view class='text'>{{productinfo.fields.description}}</view>
+  </view>
+  <button class='paybtn' bindtap='selectaddr'>选取收货地址</button>
+  <view wx:if="{{address != ''}}">
+    <textarea class='text' maxlength='280' name="address" value="{{address}}" style='width:100%;height: 100rpx;overflow-y: scroll;'/>
+  </view>
+  <view class='count'>购买数量：
+    <text class='button' bindtap='reducecount'>-</text>
+    <text class='num'>  {{count}}  </text>
+    <text class='button' bindtap='addcount'>+</text>
+  </view>
+  <button class='paybtn' form-type='submit'>微信支付</button>
+</form>
+</view>

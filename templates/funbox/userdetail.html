@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>用户详情</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="screen-orientation" content="portrait" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/jy.css" type="text/css" />
+</head>
+<body class="_userDetail_page">
+  <div align="center">
+    <form action="{% url 'funbox_updateuser' %}" id="uinfoForm" method="post" enctype="multipart/form-data">{% csrf_token %}
+      <div class="_userDetail_1">
+        <div class="media-drop2">
+          <div id="droppedimage2">
+            <img src="{{ userinfo.pic }}" id="userlogo" width="62px" height="62px" style="position:absolute;z-index:2;top:6px;left:50%;margin-left:-31px;border-radius:31px;border:1px solid #00A0E9">
+          </div>
+          <div id="dropbox2" class="media-drop-placeholder" style="position:relative;z-index:3;opacity:0;left:20px;">
+            <input id="realUploadBtn2" name="media-drop-placeholder-file" type="file" accept="image/*" tabindex="-1"/>
+          </div>
+          <div style="position:relative;z-index:3;opacity:0;">
+            <input type="hidden" id="fname2" value="_user_{{ userinfo.userid }}" />
+            <input type="hidden" name="pic" id="filename2" value="{{ userinfo.pic }}" />
+            <button id="resetupload2" type="button" class="btn">重新上传</button>
+          </div>
+        </div>
+        <h4 style="color:#2CA6E0;margin:20px 0 auto 0;font-size:1.6rem;">用户详情</h4>
+        <table class="update_table">
+            <tr style="height:25px;">
+                <td style="width:30%;text-align:center;padding-left:10px;">昵　称：</td>
+                <td><input class="_userDetail_input" type="text" name="name" value="{{ userinfo.name }}" /></td>
+            </tr>
+            <tr style="height:25px;">
+                <td style="width:30%;text-align:center;padding-left:10px;">电　话：</td>
+                <td><input class="_userDetail_input" type="text" name="phone" value="{{ userinfo.phone }}" /></td>
+            </tr>
+            <tr style="height:25px;">
+              	<td style="width:30%;text-align:center;padding-left:10px;">签　名：</td>
+                <td><input class="_userDetail_input" type="text" name="description" value="{{ userinfo.description }}" /></td>
+            </tr>
+            <tr style="height:25px;">
+              	<td style="width:30%;text-align:center;padding-left:10px;">密　码：</td>
+                <td><input class="_userDetail_input" type="text" name="password" value="{{ userinfo.password }}" /></td>
+            </tr>
+            <tr style="height:15px;"><td colspan="2"></td>
+            <tr><td colspan="2"><center>
+                <input type="hidden" name="userid" value="{{ userinfo.userid }}" />
+                <button type="submit" class="_update_btn"><span style="color:white;font-size:12px;font-weight:bold;">修改信息</span></button>
+            </center></td></tr>
+        </table>
+        <br/>
+              <table class="_update_table_2">
+              <tr>
+                <td>用户ID：</td>
+                <td>{{ userinfo.userid }}</td>
+                <td style="width:48px;">&nbsp;</td>
+                <td>微　信：</td>
+                <td>{% if userinfo.wxid %}已绑定{% else %}未绑定{% endif %}</td>
+              </tr>
+              <tr>
+                <td>类　型：</td>
+                <td>{% if userinfo.type == 0 %}WEB{% elif userinfo.type == 1 %}APP{% endif %}</td>
+                <td></td>
+                <td>开户日：</td>
+                <td>{{ userinfo.jointime }}</td>
+              </tr>
+              <tr>
+                <td>余　额：</td>
+                <td>{{ userinfo.balance }}</td>
+                <td></td>
+                <td>总消费：</td>
+                <td>{{ userinfo.total }}</td>
+              </tr>
+            </table>
+            <br/>
+        </div>
+	<div style="margin-top:20px;">
+        <h4 style="margin:0 0 5px 0;color:#2CA6E0;">交易记录</h4>
+        <table class="list_table">
+          <tr>
+                <th style="text-align:center;width:80px;">订单ID</th>
+                <th style="text-align:center;">商户</th>
+                <th style="text-align:center;">渠道</th>
+                <th style="text-align:center;">返后消费</th>
+                <th style="text-align:center;">日期</th>
+                <th style="text-align:center;">状态</th>
+          </tr>
+          {% for i in spendlist %}
+          <tr>
+            <td><p style="word-break:break-all;">{{ i.orderid }}</p></td>
+            <td>{{ i.memberid }}</td>
+            <td>{{ i.type }}</td>
+            <td>{{ i.amount }}</td>
+            <td>{{ i.date|date:"Y-m-d H:i:s" }}</td>
+            <td>{% if i.status == 0 %}已退款{% else %}已支付{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </form>  
+  </div>
+  <br/>
+  <br/>
+  <div align="center" style="color:#B4B4B5;font-size:12px;margin-top:25px;">本平台由<a style="color:#00A0E9" href="http://www.jyousoft.com">捷优软件</a>提供. <br/>Copyright 2013-2017. All rights reserved.</div>
+  <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.html5uploader-1.1.js"></script>
+  <script src="{{ STATIC_URL }}js/exif.js"></script>
+  <script src="{{ STATIC_URL }}js/uploadimg.js"></script>
+  <script>
+  $(document).ready(function () {
+    var form = $('#uinfoForm');
+    form.submit(function () {
+      $.post(form.attr("action"),
+        form.serialize(),
+        function (data) {
+          alert(data);
+        });
+      return false;
+     });
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+<head>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jy.css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>商户二维码</title>
+</head>
+<body class="_code_page">
+  <center>
+    <img class="_logo" src="{{ minfo.logo }}" width="30%"/>
+    <div class="_code_border">
+    	<p class="_code_text_1">{{ minfo.name }}</p>
+    	<img class src="{{ baseurl }}{{ minfo.memberid }}" width="70%" style="max-width:445px;"/>
+    <p class="_code_text_2">微信扫一扫付款{% if minfo.man != 0 %}，满{{ minfo.man }}<font color='red'>返</font>{{ minfo.jian }}{% endif %}</p>
+    </div>
+    <p class="_pageEnd">捷优支付提供技术支持</p>
+    <p class="_pageEnd">加盟/投诉电话：13810776712</p>
+  </center>
+</html>

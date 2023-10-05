@@ -1,0 +1,35 @@
+.wrap {
+  background: #f4f4f4;
+}
+.list {
+  padding: 40rpx;
+  padding-bottom: 0rpx;
+  background: #fff;
+}
+.item {
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #d9d9d9;
+  font-size: 28rpx;
+  margin-bottom: 40rpx;
+}
+.item input {}
+.save {
+  background: #B4282D;
+  color: #fff;
+  text-align: center;
+  padding: 25rpx;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 28rpx;
+}
+.set {
+  font-size: 24rpx;
+  padding: 0 40rpx;
+}
+.set checkbox {
+  border-radius: 50%;
+}
+.address view{
+  margin-right: 20rpx;
+}

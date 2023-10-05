@@ -1,0 +1,35 @@
+{% extends "yukangyuan/base.html" %}
+{% block pagebody %}
+  <div align="center" style="margin-top:20px;">
+    <h2 class="_title">裕康源企业合作系统</h2>
+      <form id="login" action="{% url 'yukangyuan_dologin' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        <table class="_rg_border_1">
+          <tr>
+            <td colspan="2" height="20px"></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">编号：</td>
+            <td><input type="text" name="userid" style="width:90%;" value="{{ olduser }}"/></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">密码：</td>
+            <td><input type="text" name="password" style="width:90%"/></td>
+          </tr>
+          <tr height="30px">
+            <td style="text-align:center;">身份：</td>
+            <td>
+              <select name="type" style="width:93%;height:25px;">
+                <option value="0">商户</option>
+                <option value="1">业务员</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" height="20px"></td>
+          </tr>
+        </table>
+        <center><button id="submit" class="_upload_btn">登  录</button></center>
+      </form>
+  </div><br/>
+  <img src="http://ww3.sinaimg.cn/mw690/558fe6e3jw1f5r0x6upsuj20m80llmyx.jpg" width="100%">
+{% endblock %}

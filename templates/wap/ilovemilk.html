@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>爱牛奶</title>
+    <link rel="stylesheet" type="text/css" href="http://123.206.26.34/html/wap/ilovemilk/wap.css" />
+</head>
+<body class="index_page">
+    <div class="header">
+        <div class="header_inner">
+            <img src="http://123.206.26.34/html/wap/ilovemilk/header.png">
+        </div>
+    </div>
+    {% for i in items %}
+    <div class="banner_box">
+        <div class="inner">
+            <img src="{{ i.pic }}">
+            <div class="mov_con">
+                <div class="py_logo">
+                    <img src="http://123.206.26.34/html/wap/ilovemilk/logo.png">
+                </div>
+                <div class="fn_box clearfix">
+                    <a href="javascript:;" class="fl share_btn">分享</a>
+                    <a href="javascript:;" class="fr zan_btn">赞</a>
+                </div>
+                <div class="txt">
+                    <a href="{{ i.link }}"><p>{{ i.description }}{% if i.price %}&emsp;<font color=red>￥{{ i.price }}</font>{% endif %}</p></a>
+                </div>
+            </div>
+            <div class="text">
+                <span class="s1">{{ i.title }}</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="footer j_footer_fixed footer_on">
+        <ul class="clearfix">
+            <li class="fl on">
+                <a href="http://weixinpt.sinaapp.com/wanda/subpage/1/">
+                    首页
+                </a>
+            </li>
+            <li class="fl">
+                <a href="http://weixinpt.sinaapp.com/wanda/subpage/2/">
+                    公开课
+                </a>
+            </li>
+            <li class="fl">
+                <a href="http://buluo.qq.com/p/barindex.html?bid=91395">
+                    养牛圈
+                </a>
+            </li>
+            <li class="fl">
+                <a href="http://toutiao.com/m4000549503/">
+                    牛奶头条
+                </a>
+            </li>
+            <li class="fr">
+                <a href="http://weixinpt.sinaapp.com/wanda/subpage/3/">
+                    志愿者
+                </a>
+            </li>
+        </ul>
+    </div>
+    <a href="javascript:;"  class="g_btn"><img src="http://123.206.26.34/html/wap/ilovemilk/g_btn.png" class="in_animate_opa"></a>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/headroom.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/wap.js"></script>
+</body>
+</html>
